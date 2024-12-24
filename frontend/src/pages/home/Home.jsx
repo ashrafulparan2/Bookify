@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import Banner from './Banner';
+import News from './News';
 
 class home extends PureComponent {
     render() {
         return (
             <div>
                 <Banner/>
+                <News/>
             </div>
         );
     }
