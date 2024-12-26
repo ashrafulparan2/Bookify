@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from 'react-router-dom';
 // import { useAuth } from '../../context/AuthContext';
 
-// import Swal from'sweetalert2';
+import Swal from'sweetalert2';
 // import { useCreateOrderMutation } from '../../redux/features/orders/ordersApi';
 
 const CheckoutPage = () => {
@@ -19,7 +19,7 @@ const CheckoutPage = () => {
         formState: { errors },
     } = useForm()
 
-    const [createOrder, {isLoading, error}] = useCreateOrderMutation();
+    // const [createOrder, {isLoading, error}] = useCreateOrderMutation();
     const navigate =  useNavigate()
 
     const [isChecked, setIsChecked] = useState(false)
@@ -58,7 +58,7 @@ const CheckoutPage = () => {
         }
     }
 
-    if(isLoading) return <div>Loading....</div>
+    // if(isLoading) return <div>Loading....</div>
     return (
         <section>
             <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
@@ -165,7 +165,7 @@ const CheckoutPage = () => {
                                                     <input
                                                         onChange={(e) => setIsChecked(e.target.checked)}
                                                         type="checkbox" name="billing_same" id="billing_same" className="form-checkbox" />
-                                                    <label htmlFor="billing_same" className="ml-2 ">I am aggree to the <Link className='underline underline-offset-2 text-blue-600'>Terms & Conditions</Link> and <Link className='underline underline-offset-2 text-blue-600'>Shoping Policy.</Link></label>
+                                                    <label htmlFor="billing_same" className="ml-2 ">I aggree to the <Link className='underline underline-offset-2 text-blue-600'>Terms & Conditions</Link> and <Link className='underline underline-offset-2 text-blue-600'>Shoping Policy.</Link></label>
                                                 </div>
                                             </div>
 
