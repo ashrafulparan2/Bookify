@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { HiBars3CenterLeft } from "react-icons/hi2";
+import { HiMiniBars3CenterLeft, HiOutlineHeart, HiOutlineShoppingCart } from "react-icons/hi2";
 import { FaSearch } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import avatarImg from "../assets/avatar.png";
+import { useSelector } from "react-redux";
 
 const navigation = [
   { name: "Dashboard", href: "/user-dashboard" },
@@ -18,13 +19,16 @@ const navigation = [
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   console.log(isDropdownOpen);
+
+  const cartItems = useSelector(State=>State.cart.cartItems);
+
   const currentUser = false;
   return (
     <header className="max-w-screen-2xl mx-auto px-4 py-6">
       <nav className="flex justify-between items-center">
         <div className="flex items-center md:gap-16 gap-4">
           <Link to="/">
-            <HiBars3CenterLeft className="size-6" />
+            <HiMiniBars3CenterLeft className="size-6" />
           </Link>
           {/* Search icon  */}
           <div className="relative sm:w-72 w-40 space-x-2">
@@ -82,12 +86,12 @@ const Navbar = () => {
             <FaHeart className="size-6" />
           </button>
 
-          <Link
-            to="/cart"
-            className="bg-primary p-1 sm:px-6 px-2 flex items-center rounded-sm"
-          >
+          <Link to="/cart" className="bg-primary p-1 sm:px-6 px-2 flex items-center rounded-sm">
             <FaShoppingCart className="size-6" />
-            <span className="text-sm font-semibold sm:ml-1">0</span>
+            {
+                cartItems.length > 0 ?  <span className="text-sm font-semibold sm:ml-1">{cartItems.length}</span> :  <span className="text-sm font-semibold sm:ml-1">0</span>
+            }
+            {/* <span className="text-sm font-semibold sm:ml-1">0</span> */}
           </Link>
         </div>
       </nav>
