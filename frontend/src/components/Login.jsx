@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form"
 import { useAuth } from '../context/AuthContext';
+import { getAuth, fetchSignInMethodsForEmail } from "firebase/auth";
 
 const Login = () => {
     const [message, setMessage] = useState("")
@@ -36,6 +37,7 @@ const Login = () => {
             console.error(error)
         }
       }
+      
   return (
     <div className='h-[calc(100vh-120px)] flex justify-center items-center '>
         <div className='w-full max-w-sm mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
