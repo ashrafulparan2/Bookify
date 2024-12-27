@@ -1,41 +1,40 @@
-const mongoose = require('mongoose')
+const mongoose =  require('mongoose');
 
 const bookSchema = new mongoose.Schema({
-    _id : {
-        type : Number
+    title: {
+        type: String,
+        required: true,
     },
-    title : {
-        type : String,
-        required : true
+    description:  {
+        type: String,
+        required: true,
     },
-    description : {
-        type : String, 
-        required : true
+    category:  {
+        type: String,
+        required: true,
     },
-    category : {
-        type : String,
-        required : true
+    trending: {
+        type: Boolean,
+        required: true,
     },
-    trending : {
-        type : Boolean,
-        required : true
+    coverImage: {
+        type: String,
+        required: true,
     },
-    coverImage : {
-        type : String,
-        required : true
+    oldPrice: {
+        type: Number,
+        required: true,
     },
-    oldPrice : {
-        type : Number
+    newPrice: {
+        type: Number,
+        required: true,
     },
-    newPrice : {
-        type : Number
-    },
-    dateCreated : {
-        type : Date,
-        default : Date.now
+    createdAt: {
+        type: Date,
+        default: Date.now,
     }
   }, {
-    timestamps : true,
+    timestamps: true,
   });
 
   const Book = mongoose.model('Book', bookSchema);
