@@ -6,19 +6,17 @@ const Banner = () => {
 
   return (
     <div className='flex flex-col md:flex-row-reverse py-16 justify-between items-center gap-12'>
-      {/* Image Section */}
-      <div className='md:w-1/2 w-full flex items-center md:justify-end'>
-        <img src={bannerImg} alt="Banner" />
-      </div>
-
-      {/* Text and Button Section */}
-      <div className='md:w-1/2 w-full'>
-        <h1 className='md:text-5xl text-2xl font-medium mb-7'>New Releases This Week</h1>
-        <p className='mb-10'>
-          It's time to update your reading list with some of the latest and greatest releases in
-          the literary world. From heart-pumping thrillers to captivating memoirs, this week's new
-          releases offer something for everyone.
-        </p>
+         <div className='md:w-1/2 w-full flex items-center md:justify-end'>
+            <img src={bannerImg} alt="" />
+        </div>
+        
+        <div className='md:w-1/2 w-full'>
+        <h2 className="md:text-3xl text-2xl font-medium mb-7 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+    পাঠে নতুন দিগন্ত, বইয়ের সাথে বন্ধুত্ব
+</h2>
+<p className="mb-10">
+    আপনার প্রিয় বই এখন এক ক্লিকে – সহজে বই কিনুন, নতুন বইয়ের কালেকশন আবিষ্কার করুন এবং সেরা অফারে আপনার বুকশেলফ সাজান আমাদের বুকস্টোর থেকে!
+</p>
 
         {/* Button with hover and transition effects */}
         <button
