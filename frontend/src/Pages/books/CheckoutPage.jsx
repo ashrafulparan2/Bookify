@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 import Swal from'sweetalert2';
-// import { useCreateOrderMutation } from '../../redux/features/orders/ordersApi';
+import { useCreateOrderMutation } from '../../redux/features/orders/ordersApi';
 
 const CheckoutPage = () => {
     const cartItems = useSelector(state => state.cart.cartItems);
@@ -19,7 +19,7 @@ const CheckoutPage = () => {
         formState: { errors },
     } = useForm()
 
-    // const [createOrder, {isLoading, error}] = useCreateOrderMutation();
+    const [createOrder, {isLoading, error}] = useCreateOrderMutation();
     const navigate =  useNavigate()
 
     const [isChecked, setIsChecked] = useState(false)
@@ -39,6 +39,7 @@ const CheckoutPage = () => {
             productIds: cartItems.map(item => item?._id),
             totalPrice: totalPrice,
         }
+        console.log("New Order", newOrder)
         
         try {
             await createOrder(newOrder).unwrap();
@@ -58,7 +59,7 @@ const CheckoutPage = () => {
         }
     }
 
-    // if(isLoading) return <div>Loading....</div>
+    if(isLoading) return <div>Loading....</div>
     return (
         <section>
             <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
