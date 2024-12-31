@@ -127,102 +127,129 @@ export const AllBooksPage = () => {
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-3xl font-bold text-center mb-8">All Books</h1>
 
-            {/* Filters */}
-            <div className="mb-8 flex flex-col gap-4">
-            <div>
-    <label>Price Range:</label>
-    <div className="flex items-center gap-4">
-        <input
-            type="range"
-            min="0"
-            max="1000"
-            step="10"
-            value={filters.priceRange[0]}
-            onChange={(e) =>
-                setFilters((prev) => ({
-                    ...prev,
-                    priceRange: [Number(e.target.value), prev.priceRange[1]],
-                }))
-            }
-            className="w-full"
-        />
-        <span>৳{filters.priceRange[0]}</span>
-    </div>
-    <div className="flex items-center gap-4 mt-2">
-        <input
-            type="range"
-            min="0"
-            max="1000"
-            step="10"
-            value={filters.priceRange[1]}
-            onChange={(e) =>
-                setFilters((prev) => ({
-                    ...prev,
-                    priceRange: [prev.priceRange[0], Number(e.target.value)],
-                }))
-            }
-            className="w-full"
-        />
-        <span>৳{filters.priceRange[1]}</span>
-    </div>
-    <div>
-        Selected Range: ৳{filters.priceRange[0]} - ৳{filters.priceRange[1]}
-    </div>
-</div>
+            {/* Filters Section */}
+            <div className="mb-8 p-4 bg-white shadow rounded-lg">
+                <h2 className="text-xl font-bold mb-4">Filters</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    {/* Price Range Filter */}
+                    <div>
+                        <label className="block font-semibold mb-2">Price Range</label>
+                        <div className="mb-4">
+                            <div className="flex items-center gap-2">
+                                <span className="text-sm">Min: ৳{filters.priceRange[0]}</span>
+                                <input
+                                    type="range"
+                                    min="0"
+                                    max="1000"
+                                    step="10"
+                                    value={filters.priceRange[0]}
+                                    onChange={(e) =>
+                                        setFilters((prev) => ({
+                                            ...prev,
+                                            priceRange: [
+                                                Number(e.target.value),
+                                                prev.priceRange[1],
+                                            ],
+                                        }))
+                                    }
+                                    className="w-full"
+                                />
+                            </div>
+                            <div className="flex items-center gap-2 mt-2">
+                                <span className="text-sm">Max: ৳{filters.priceRange[1]}</span>
+                                <input
+                                    type="range"
+                                    min="0"
+                                    max="1000"
+                                    step="10"
+                                    value={filters.priceRange[1]}
+                                    onChange={(e) =>
+                                        setFilters((prev) => ({
+                                            ...prev,
+                                            priceRange: [
+                                                prev.priceRange[0],
+                                                Number(e.target.value),
+                                            ],
+                                        }))
+                                    }
+                                    className="w-full"
+                                />
+                            </div>
+                            <p className="text-sm mt-2">
+                                Selected Range: ৳{filters.priceRange[0]} - ৳{filters.priceRange[1]}
+                            </p>
+                        </div>
+                    </div>
 
-
-                <div>
-                    <label>Category:</label>
-                    <select
-                        name="category"
-                        value={filters.category}
-                        onChange={handleFilterChange}
-                        className="border px-2 py-1"
-                    >
-                        <option value="">All Categories</option>
-                        <option value="ইতিহাস ও ঐতিহ্য">ইতিহাস ও ঐতিহ্য</option>
-                        <option value="উপন্যাস">উপন্যাস</option>
-                        <option value="গণিত, বিজ্ঞান ও প্রযুক্তি">গণিত, বিজ্ঞান ও প্রযুক্তি</option>
-                        <option value="ছড়া, কবিতা ও আবৃত্তি">ছড়া, কবিতা ও আবৃত্তি</option>
-                        <option value="থ্রিলার">থ্রিলার</option>
-                        <option value="ধর্মীয়">ধর্মীয়</option>
-                        <option value="প্রবন্ধ">প্রবন্ধ</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label>
-                        <input
-                            type="checkbox"
-                            name="trending"
+                    {/* Category Filter */}
+                    <div>
+                        <label className="block font-semibold mb-2" htmlFor="category">
+                            Category
+                        </label>
+                        <select
+                            id="category"
+                            name="category"
+                            value={filters.category}
                             onChange={handleFilterChange}
-                        />
-                        Trending
-                    </label>
-                </div>
+                            className="border border-gray-300 rounded p-2 w-full focus:outline-none"
+                        >
+                            <option value="">All Categories</option>
+                            <option value="ইতিহাস ও ঐতিহ্য">ইতিহাস ও ঐতিহ্য</option>
+                            <option value="উপন্যাস">উপন্যাস</option>
+                            <option value="গণিত, বিজ্ঞান ও প্রযুক্তি">গণিত, বিজ্ঞান ও প্রযুক্তি</option>
+                            <option value="ছড়া, কবিতা ও আবৃত্তি">ছড়া, কবিতা ও আবৃত্তি</option>
+                            <option value="থ্রিলার">থ্রিলার</option>
+                            <option value="ধর্মীয়">ধর্মীয়</option>
+                            <option value="প্রবন্ধ">প্রবন্ধ</option>
+                        </select>
+                    </div>
 
-                <div>
-                    <label>
-                        <input
-                            type="checkbox"
-                            name="discount"
-                            onChange={handleFilterChange}
-                        />
-                        Discount
-                    </label>
-                </div>
+                    {/* Trending + Discount */}
+                    <div>
+                        <label className="block font-semibold mb-2">Others</label>
+                        <div className="flex flex-col gap-2">
+                            <label className="inline-flex items-center">
+                                <input
+                                    type="checkbox"
+                                    name="trending"
+                                    onChange={handleFilterChange}
+                                    className="mr-2"
+                                />
+                                <span className="text-sm">Trending</span>
+                            </label>
+                            <label className="inline-flex items-center">
+                                <input
+                                    type="checkbox"
+                                    name="discount"
+                                    onChange={handleFilterChange}
+                                    className="mr-2"
+                                />
+                                <span className="text-sm">Discount</span>
+                            </label>
+                        </div>
+                    </div>
 
-                <div>
-                    <label>Sort By:</label>
-                    <select name="sortOption" onChange={handleSortChange} className="border px-2 py-1">
-                        <option value="">Select</option>
-                        <option value="priceAsc">Price (Low to High)</option>
-                        <option value="priceDesc">Price (High to Low)</option>
-                        <option value="nameAsc">Name (A-Z)</option>
-                        <option value="nameDesc">Name (Z-A)</option>
-                        <option value="dateAsc">Date (Old to New)</option>
-                        <option value="dateDesc">Date (New to Old)</option>
-                    </select>
+                    {/* Sorting */}
+                    <div>
+                        <label className="block font-semibold mb-2" htmlFor="sortOption">
+                            Sort By
+                        </label>
+                        <select
+                            id="sortOption"
+                            name="sortOption"
+                            onChange={handleSortChange}
+                            className="border border-gray-300 rounded p-2 w-full focus:outline-none"
+                        >
+                            <option value="">Select</option>
+                            <option value="priceAsc">Price (Low to High)</option>
+                            <option value="priceDesc">Price (High to Low)</option>
+                            <option value="nameAsc">Name (A-Z)</option>
+                            <option value="nameDesc">Name (Z-A)</option>
+                            <option value="dateAsc">Date (Old to New)</option>
+                            <option value="dateDesc">Date (New to Old)</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
