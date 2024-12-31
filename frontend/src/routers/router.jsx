@@ -1,17 +1,19 @@
-import {createBrowserRouter,} from "react-router-dom";
+import { createBrowserRouter, } from "react-router-dom";
 import App from "../App";
 
 import Home from "../pages/home/Home";
 
+import AdminLogin from "../components/AdminLogin";
 import Login from "../components/Login";
 import Register from "../components/Register";
-import CheckoutPage from "../Pages/books/CheckoutPage";
 import CartPage from "../Pages/books/CartPage";
-import PrivateRoute from "./PrivateRoute";
-import SingleBook from "../Pages/books/SingleBook";
+import CheckoutPage from "../Pages/books/CheckoutPage";
 import OrderPage from "../pages/books/OrderPage";
+import SingleBook from "../Pages/books/SingleBook";
+import AddBook from "../Pages/dashboard/addBook/AddBook";
+import UpdateBook from "../Pages/dashboard/EditBook/UpdateBook";
 import AdminRoute from "./AdminRoute";
-import AdminLogin from "../components/AdminLogin";
+import PrivateRoute from "./PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -68,12 +70,12 @@ const router = createBrowserRouter([
         },
         {
           path: "add-new-book",
-          element: <AdminRoute> <div>Add new book</div> </AdminRoute>,
+          element: <AdminRoute> <AddBook/> </AdminRoute>,
 
         },
         {
           path: "edit-book/:id",
-          element: <AdminRoute> <div>Edit Book </div> </AdminRoute>,
+          element: <AdminRoute> <UpdateBook/> </AdminRoute>,
 
         },
         {
