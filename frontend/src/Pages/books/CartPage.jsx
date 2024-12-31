@@ -8,6 +8,9 @@ const CartPage = () => {
     const cartItems = useSelector((state) => state.cart.cartItems);
     const dispatch = useDispatch();
 
+    const [isHoveredCart, setIsHoveredCart] = useState(false);
+
+
     const [selectedQuantity, setSelectedQuantity] = useState(1); // For Swal modal quantity
 
     // Calculate total price and ensure two decimal places
@@ -92,10 +95,30 @@ const CartPage = () => {
                             <button
                                 type="button"
                                 onClick={handleClearCart}
-                                className="relative -m-2 py-1 px-2 bg-red-500 text-white rounded-md hover:bg-secondary transition-all duration-200"
+                                className="relative -m-2 py-1 px-2 text-white rounded-md transition-all duration-200"
+                                style={{
+                                    display: "inline-flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textDecoration: "none",
+                                    minWidth: "110px", // Minimum width for the button
+                                    width: "auto", // Allow width to adjust based on content
+                                    height: "40px", // Set height for consistency
+                                    color: "#fff",
+                                    backgroundImage: "linear-gradient(45deg, #ff4b5c, #d72f3b)", // Red gradient effect
+                                    fontSize: "16px",
+                                    borderRadius: isHoveredCart ? "30px" : "30px 30px 30px 30px",
+                                    transition: "all 0.3s ease-in-out",
+                                    border: "none",
+                                    cursor: "pointer",
+                                    transform: isHoveredCart ? "scale(1.1)" : "scale(1)",
+                                }}
+                                onMouseEnter={() => setIsHoveredCart(true)}
+                                onMouseLeave={() => setIsHoveredCart(false)}
                             >
                                 <span>Clear Cart</span>
                             </button>
+
                         </div>
                     )}
                 </div>
@@ -106,7 +129,7 @@ const CartPage = () => {
                             <ul role="list" className="-my-6 divide-y divide-gray-200">
                                 {cartItems.map((product) => (
                                     <li key={product._id} className="flex py-6">
-                                        <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                        <div className="h-32 w-32 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                             <img
                                                 alt="Product"
                                                 src={getImgUrl(product?.coverImage)}
@@ -116,11 +139,11 @@ const CartPage = () => {
 
                                         <div className="ml-4 flex flex-1 flex-col">
                                             <div>
-                                                <div className="flex flex-wrap justify-between text-base font-medium text-gray-900">
-                                                    <h3>
+                                                <div className="flex flex-wrap justify-between text-lg font-medium text-gray-900">
+                                                    <h3 className="text-xl font-semibold">
                                                         <Link to={`/books/${product?._id}`}>{product?.title}</Link>
                                                     </h3>
-                                                    <p className="sm:ml-4">
+                                                    <p className="sm:ml-4 text-lg font-semibold">
                                                         ${(product?.newPrice * product?.quantity).toFixed(2)}
                                                     </p>
                                                 </div>
@@ -133,14 +156,14 @@ const CartPage = () => {
                                                 <div className="flex items-center">
                                                     <button
                                                         onClick={() => handleDecreaseQuantity(product)}
-                                                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                                                        className="font-medium text-gray-600 hover:text-indigo-500 bg-gradient-to-r from-white via-gray-100 to-white rounded-md w-10 h-10 flex items-center justify-center shadow-md text-xl"
                                                     >
                                                         -
                                                     </button>
                                                     <span className="mx-2">{product?.quantity}</span>
                                                     <button
                                                         onClick={() => handleIncreaseQuantity(product)}
-                                                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                                                        className="font-medium text-gray-600 hover:text-indigo-500 bg-gradient-to-r from-white via-gray-100 to-white rounded-md w-10 h-10 flex items-center justify-center shadow-md text-xl"
                                                     >
                                                         +
                                                     </button>
@@ -150,7 +173,7 @@ const CartPage = () => {
                                                     <button
                                                         onClick={() => handleRemoveFromCart(product)}
                                                         type="button"
-                                                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                                                        className="font-medium text-red-600 border-2 border-red-600 rounded-md px-6 py-3 hover:bg-red-600 hover:text-white transition-all duration-200 text-md"
                                                     >
                                                         Remove
                                                     </button>
