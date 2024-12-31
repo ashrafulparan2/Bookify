@@ -39,7 +39,7 @@ export const AllBooksPage = () => {
     }, []);
 
     useEffect(() => {
-        let updatedBooks = books;
+        let updatedBooks = [...books];
 
         // Filter by price range
         updatedBooks = updatedBooks.filter(
@@ -107,11 +107,6 @@ export const AllBooksPage = () => {
         }
     };
 
-    const handlePriceChange = (e) => {
-        const [min, max] = e.target.value.split(",").map(Number);
-        setFilters((prev) => ({ ...prev, priceRange: [min, max] }));
-    };
-
     const handleSortChange = (e) => {
         setSortOption(e.target.value);
     };
@@ -125,131 +120,122 @@ export const AllBooksPage = () => {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold text-center mb-8">All Books</h1>
+            {/* <h1 className="text-2xl font-bold text-center mb-4">All Books</h1> */}
 
-            {/* Filters Section */}
-            <div className="mb-8 p-4 bg-white shadow rounded-lg">
-                <h2 className="text-xl font-bold mb-4">Filters</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    
-                    {/* Price Range Filter */}
-                    <div>
-                        <label className="block font-semibold mb-2">Price Range</label>
-                        <div className="mb-4">
-                            <div className="flex items-center gap-2">
-                                <span className="text-sm">Min: ৳{filters.priceRange[0]}</span>
-                                <input
-                                    type="range"
-                                    min="0"
-                                    max="1000"
-                                    step="10"
-                                    value={filters.priceRange[0]}
-                                    onChange={(e) =>
-                                        setFilters((prev) => ({
-                                            ...prev,
-                                            priceRange: [
-                                                Number(e.target.value),
-                                                prev.priceRange[1],
-                                            ],
-                                        }))
-                                    }
-                                    className="w-full"
-                                />
-                            </div>
-                            <div className="flex items-center gap-2 mt-2">
-                                <span className="text-sm">Max: ৳{filters.priceRange[1]}</span>
-                                <input
-                                    type="range"
-                                    min="0"
-                                    max="1000"
-                                    step="10"
-                                    value={filters.priceRange[1]}
-                                    onChange={(e) =>
-                                        setFilters((prev) => ({
-                                            ...prev,
-                                            priceRange: [
-                                                prev.priceRange[0],
-                                                Number(e.target.value),
-                                            ],
-                                        }))
-                                    }
-                                    className="w-full"
-                                />
-                            </div>
-                            <p className="text-sm mt-2">
-                                Selected Range: ৳{filters.priceRange[0]} - ৳{filters.priceRange[1]}
-                            </p>
+            {/* Condensed Filters */}
+            <div className="mb-4 p-2 bg-white rounded-md shadow-sm flex flex-wrap gap-4 items-end">
+                {/* Price Range */}
+                <div className="flex flex-col min-w-[150px]">
+                    <label className="text-sm font-semibold mb-1">Price Range</label>
+                    <div className="text-xs flex flex-col gap-1">
+                        <div className="flex items-center gap-2">
+                            <span>৳{filters.priceRange[0]}</span>
+                            <input
+                                type="range"
+                                min="0"
+                                max="1000"
+                                step="10"
+                                value={filters.priceRange[0]}
+                                onChange={(e) =>
+                                    setFilters((prev) => ({
+                                        ...prev,
+                                        priceRange: [
+                                            Number(e.target.value),
+                                            prev.priceRange[1],
+                                        ],
+                                    }))
+                                }
+                                className="w-full"
+                            />
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <span>৳{filters.priceRange[1]}</span>
+                            <input
+                                type="range"
+                                min="0"
+                                max="1000"
+                                step="10"
+                                value={filters.priceRange[1]}
+                                onChange={(e) =>
+                                    setFilters((prev) => ({
+                                        ...prev,
+                                        priceRange: [
+                                            prev.priceRange[0],
+                                            Number(e.target.value),
+                                        ],
+                                    }))
+                                }
+                                className="w-full"
+                            />
                         </div>
                     </div>
+                </div>
 
-                    {/* Category Filter */}
-                    <div>
-                        <label className="block font-semibold mb-2" htmlFor="category">
-                            Category
-                        </label>
-                        <select
-                            id="category"
-                            name="category"
-                            value={filters.category}
+                {/* Category */}
+                <div className="flex flex-col min-w-[120px]">
+                    <label className="text-sm font-semibold mb-1" htmlFor="category">
+                        Category
+                    </label>
+                    <select
+                        id="category"
+                        name="category"
+                        value={filters.category}
+                        onChange={handleFilterChange}
+                        className="border border-gray-300 rounded p-1 text-sm"
+                    >
+                        <option value="">All</option>
+                        <option value="ইতিহাস ও ঐতিহ্য">ইতিহাস ও ঐতিহ্য</option>
+                        <option value="উপন্যাস">উপন্যাস</option>
+                        <option value="গণিত, বিজ্ঞান ও প্রযুক্তি">গণিত, বিজ্ঞান ও প্রযুক্তি</option>
+                        <option value="ছড়া, কবিতা ও আবৃত্তি">ছড়া, কবিতা ও আবৃত্তি</option>
+                        <option value="থ্রিলার">থ্রিলার</option>
+                        <option value="ধর্মীয়">ধর্মীয়</option>
+                        <option value="প্রবন্ধ">প্রবন্ধ</option>
+                    </select>
+                </div>
+
+                {/* Trending & Discount Checkboxes */}
+                <div className="flex items-center gap-4">
+                    <label className="flex items-center text-sm">
+                        <input
+                            type="checkbox"
+                            name="trending"
                             onChange={handleFilterChange}
-                            className="border border-gray-300 rounded p-2 w-full focus:outline-none"
-                        >
-                            <option value="">All Categories</option>
-                            <option value="ইতিহাস ও ঐতিহ্য">ইতিহাস ও ঐতিহ্য</option>
-                            <option value="উপন্যাস">উপন্যাস</option>
-                            <option value="গণিত, বিজ্ঞান ও প্রযুক্তি">গণিত, বিজ্ঞান ও প্রযুক্তি</option>
-                            <option value="ছড়া, কবিতা ও আবৃত্তি">ছড়া, কবিতা ও আবৃত্তি</option>
-                            <option value="থ্রিলার">থ্রিলার</option>
-                            <option value="ধর্মীয়">ধর্মীয়</option>
-                            <option value="প্রবন্ধ">প্রবন্ধ</option>
-                        </select>
-                    </div>
+                            className="mr-1"
+                        />
+                        Trending
+                    </label>
+                    <label className="flex items-center text-sm">
+                        <input
+                            type="checkbox"
+                            name="discount"
+                            onChange={handleFilterChange}
+                            className="mr-1"
+                        />
+                        Discount
+                    </label>
+                </div>
 
-                    {/* Trending + Discount */}
-                    <div>
-                        <label className="block font-semibold mb-2">Others</label>
-                        <div className="flex flex-col gap-2">
-                            <label className="inline-flex items-center">
-                                <input
-                                    type="checkbox"
-                                    name="trending"
-                                    onChange={handleFilterChange}
-                                    className="mr-2"
-                                />
-                                <span className="text-sm">Trending</span>
-                            </label>
-                            <label className="inline-flex items-center">
-                                <input
-                                    type="checkbox"
-                                    name="discount"
-                                    onChange={handleFilterChange}
-                                    className="mr-2"
-                                />
-                                <span className="text-sm">Discount</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    {/* Sorting */}
-                    <div>
-                        <label className="block font-semibold mb-2" htmlFor="sortOption">
-                            Sort By
-                        </label>
-                        <select
-                            id="sortOption"
-                            name="sortOption"
-                            onChange={handleSortChange}
-                            className="border border-gray-300 rounded p-2 w-full focus:outline-none"
-                        >
-                            <option value="">Select</option>
-                            <option value="priceAsc">Price (Low to High)</option>
-                            <option value="priceDesc">Price (High to Low)</option>
-                            <option value="nameAsc">Name (A-Z)</option>
-                            <option value="nameDesc">Name (Z-A)</option>
-                            <option value="dateAsc">Date (Old to New)</option>
-                            <option value="dateDesc">Date (New to Old)</option>
-                        </select>
-                    </div>
+                {/* Sort By */}
+                <div className="flex flex-col min-w-[110px]">
+                    <label className="text-sm font-semibold mb-1" htmlFor="sortOption">
+                        Sort By
+                    </label>
+                    <select
+                        id="sortOption"
+                        name="sortOption"
+                        value={sortOption}
+                        onChange={handleSortChange}
+                        className="border border-gray-300 rounded p-1 text-sm"
+                    >
+                        <option value="">Select</option>
+                        <option value="priceAsc">Price (Low to High)</option>
+                        <option value="priceDesc">Price (High to Low)</option>
+                        <option value="nameAsc">Name (A-Z)</option>
+                        <option value="nameDesc">Name (Z-A)</option>
+                        <option value="dateAsc">Date (Old to New)</option>
+                        <option value="dateDesc">Date (New to Old)</option>
+                    </select>
                 </div>
             </div>
 
@@ -265,19 +251,19 @@ export const AllBooksPage = () => {
                 <button
                     onClick={handlePreviousPage}
                     disabled={currentPage === 1}
-                    className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+                    className="px-4 py-1 bg-blue-500 text-white text-sm rounded disabled:bg-gray-300"
                 >
                     Previous
                 </button>
                 <button
                     onClick={handleNextPage}
                     disabled={currentPage === totalPages}
-                    className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+                    className="px-4 py-1 bg-blue-500 text-white text-sm rounded disabled:bg-gray-300"
                 >
                     Next
                 </button>
             </div>
-            <div className="text-center mt-4">
+            <div className="text-center mt-2 text-sm">
                 Page {currentPage} of {totalPages}
             </div>
         </div>
