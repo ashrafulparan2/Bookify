@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import bannerImg from "../../assets/banner1.jpg";
+import { Link } from 'react-router-dom';
 
 const Banner = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -36,7 +37,9 @@ const Banner = () => {
           onMouseEnter={() => setIsHovered(true)} // Hover starts
           onMouseLeave={() => setIsHovered(false)} // Hover ends
         >
-          Buy now
+          <Link to={`/allbooks`}>
+          কিনুন
+          </Link>
         </button>
       </div>
     </div>

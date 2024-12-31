@@ -42,7 +42,7 @@ const CartPage = () => {
             html: `
                 <div class="flex justify-center items-center">
                     <button id="decreaseBtn" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">-</button>
-                    <span id="quantity" class="mx-4 text-xl">${selectedQuantity}</span>
+                    <span id="quantity" class="mx-4 text-xl">TK. {selectedQuantity}</span>
                     <button id="increaseBtn" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">+</button>
                 </div>
             `,
@@ -141,10 +141,10 @@ const CartPage = () => {
                                             <div>
                                                 <div className="flex flex-wrap justify-between text-lg font-medium text-gray-900">
                                                     <h3 className="text-xl font-semibold">
-                                                        <Link to={`/books/${product?._id}`}>{product?.title}</Link>
+                                                        <Link to={`/books/TK. {product?._id}`}>{product?.title}</Link>
                                                     </h3>
                                                     <p className="sm:ml-4 text-lg font-semibold">
-                                                        ${(product?.newPrice * product?.quantity).toFixed(2)}
+                                                        TK. {(product?.newPrice * product?.quantity).toFixed(2)}
                                                     </p>
                                                 </div>
                                                 <p className="mt-1 text-sm text-gray-500 capitalize">
@@ -194,7 +194,7 @@ const CartPage = () => {
                 <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                     <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>${totalPrice}</p>
+                        <p>Tk. {totalPrice}</p>
                     </div>
                     <p className="mt-0.5 text-sm text-gray-500">
                         Shipping and taxes calculated at checkout.

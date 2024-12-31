@@ -70,9 +70,9 @@ const BookCard = ({ book }) => {
                 </p>
 
                 <p className="font-medium mb-5">
-                    ${book?.newPrice}{" "}
+                    TK. {book?.newPrice}{" "}
                     <span className="line-through font-normal ml-2">
-                        ${book?.oldPrice}
+                        TK. {book?.oldPrice}
                     </span>
                 </p>
 
