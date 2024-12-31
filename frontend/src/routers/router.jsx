@@ -13,6 +13,8 @@ import OrderPage from "../pages/books/OrderPage";
 import { AllBooksPage } from "../Pages/books/AllBooksPage";
 import AdminRoute from "./AdminRoute";
 import AdminLogin from "../components/AdminLogin";
+import ResetPassword from "../components/ResetPassword";
+import PasswordReset from "../components/PasswordReset";
 
 
 const router = createBrowserRouter([
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
         {
           path: "/register",
           element: <Register/>
+        },
+        {
+          path: "/reset-password", 
+          element:<PasswordReset/>
+        },
+        {
+          path: "/confirm-password", 
+          element: <ResetPassword/>
         },
         {
           path: "/checkout",
