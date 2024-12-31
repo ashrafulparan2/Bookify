@@ -66,8 +66,8 @@ const Navbar = () => {
     fetchSuggestions(query);
   };
 
-  const handleSuggestionClick = (link) => {
-    navigate(link);
+  const handleSuggestionClick = (bookId) => {
+    navigate(`/books/${bookId}`);
     setIsSuggestionsDropdownOpen(false);
     setSearchQuery("");
   };
@@ -135,8 +135,8 @@ const Navbar = () => {
                 <ul className="max-h-60 overflow-y-auto">
                   {suggestions.map((book) => (
                     <li
-                      key={book.id}
-                      onClick={() => handleSuggestionClick(`/book/${book.id}`)}
+                      key={book._id}
+                      onClick={() => handleSuggestionClick(book._id)} // Passing book ID
                       className="px-4 py-2 text-sm cursor-pointer hover:bg-gray-100"
                     >
                       {book.title}
