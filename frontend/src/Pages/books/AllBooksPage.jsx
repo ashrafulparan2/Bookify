@@ -19,7 +19,7 @@ export const AllBooksPage = () => {
 
     const [sortOption, setSortOption] = useState("");
 
-    const booksPerPage = 60;
+    const booksPerPage = 30;
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -102,12 +102,14 @@ export const AllBooksPage = () => {
         const { name, value, type, checked } = e.target;
         if (type === "checkbox") {
             setFilters((prev) => ({ ...prev, [name]: checked }));
-        } else if (name === "priceRange") {
-            const [min, max] = value.split(",").map(Number);
-            setFilters((prev) => ({ ...prev, priceRange: [min, max] }));
         } else {
             setFilters((prev) => ({ ...prev, [name]: value }));
         }
+    };
+
+    const handlePriceChange = (e) => {
+        const [min, max] = e.target.value.split(",").map(Number);
+        setFilters((prev) => ({ ...prev, priceRange: [min, max] }));
     };
 
     const handleSortChange = (e) => {
@@ -127,25 +129,65 @@ export const AllBooksPage = () => {
 
             {/* Filters */}
             <div className="mb-8 flex flex-col gap-4">
-                <div>
-                    <label>Price Range:</label>
-                    <input
-                        type="text"
-                        name="priceRange"
-                        placeholder="min,max"
-                        onChange={handleFilterChange}
-                        className="border px-2 py-1"
-                    />
-                </div>
+            <div>
+    <label>Price Range:</label>
+    <div className="flex items-center gap-4">
+        <input
+            type="range"
+            min="0"
+            max="1000"
+            step="10"
+            value={filters.priceRange[0]}
+            onChange={(e) =>
+                setFilters((prev) => ({
+                    ...prev,
+                    priceRange: [Number(e.target.value), prev.priceRange[1]],
+                }))
+            }
+            className="w-full"
+        />
+        <span>৳{filters.priceRange[0]}</span>
+    </div>
+    <div className="flex items-center gap-4 mt-2">
+        <input
+            type="range"
+            min="0"
+            max="1000"
+            step="10"
+            value={filters.priceRange[1]}
+            onChange={(e) =>
+                setFilters((prev) => ({
+                    ...prev,
+                    priceRange: [prev.priceRange[0], Number(e.target.value)],
+                }))
+            }
+            className="w-full"
+        />
+        <span>৳{filters.priceRange[1]}</span>
+    </div>
+    <div>
+        Selected Range: ৳{filters.priceRange[0]} - ৳{filters.priceRange[1]}
+    </div>
+</div>
+
 
                 <div>
                     <label>Category:</label>
-                    <input
-                        type="text"
+                    <select
                         name="category"
+                        value={filters.category}
                         onChange={handleFilterChange}
                         className="border px-2 py-1"
-                    />
+                    >
+                        <option value="">All Categories</option>
+                        <option value="ইতিহাস ও ঐতিহ্য">ইতিহাস ও ঐতিহ্য</option>
+                        <option value="উপন্যাস">উপন্যাস</option>
+                        <option value="গণিত, বিজ্ঞান ও প্রযুক্তি">গণিত, বিজ্ঞান ও প্রযুক্তি</option>
+                        <option value="ছড়া, কবিতা ও আবৃত্তি">ছড়া, কবিতা ও আবৃত্তি</option>
+                        <option value="থ্রিলার">থ্রিলার</option>
+                        <option value="ধর্মীয়">ধর্মীয়</option>
+                        <option value="প্রবন্ধ">প্রবন্ধ</option>
+                    </select>
                 </div>
 
                 <div>
