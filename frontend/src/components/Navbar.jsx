@@ -160,8 +160,8 @@ const Navbar = () => {
         {/* Right Section */}
         <div className="flex items-center gap-3 md:gap-6 relative">
           {/* Cart Button */}
-          <Link
-            to="/cart"
+            <Link
+              to="/cart"
             className="flex items-center justify-center bg-primary lg:min-w-32 sm:px-2 sm:py-1 md:px-4 md:py-2 lg:px-12 lg:py-4"
             style={{
               display: "inline-flex",
@@ -202,18 +202,20 @@ const Navbar = () => {
           </Link>
 
           {/* Heart Icon */}
-          <button
-            onMouseEnter={() => setIsHoveredHeart(true)}
-            onMouseLeave={() => setIsHoveredHeart(false)}
-            className="p-2"
-            style={{
-              transition: "transform 0.3s ease-in-out",
-              transform: isHoveredHeart ? "scale(1.2)" : "scale(1)",
-            }}
-          >
-            <FaHeart className="text-xl text-gray-800" />
-          </button>
-
+          <Link
+            to="/wishlist">
+            <button
+              onMouseEnter={() => setIsHoveredHeart(true)}
+              onMouseLeave={() => setIsHoveredHeart(false)}
+              className="p-2"
+              style={{
+                transition: "transform 0.3s ease-in-out",
+                transform: isHoveredHeart ? "scale(1.2)" : "scale(1)",
+              }}
+            >
+              <FaHeart className="text-xl text-gray-800" />
+            </button>
+          </Link>
           {/* User Profile Icon */}
           <div className="relative" style={{ minWidth: "40px" }}>
             {currentUser ? (

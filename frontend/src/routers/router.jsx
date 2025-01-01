@@ -6,12 +6,15 @@ import Register from "../components/Register";
 import CartPage from "../pages/books/CartPage";
 import CheckoutPage from "../pages/books/CheckoutPage";
 import OrderPage from "../pages/books/OrderPage";
+import PrivateRoute from "./PrivateRoute";
+import SingleBook from "../Pages/books/SingleBook";
+// import OrderPage from "../pages/books/OrderPage";
 import { AllBooksPage } from "../Pages/books/AllBooksPage";
 import AdminRoute from "./AdminRoute";
 import ResetPassword from "../components/ResetPassword";
 import PasswordReset from "../components/PasswordReset";
+import Wishlist from "../Pages/books/Wishlist";
 
-import SingleBook from "../pages/books/SingleBook";
 import AddBook from "../pages/dashboard/addBook/AddBook";
 import Dashboard from "../pages/dashboard/Dashboard";
 import DashboardLayout from "../pages/dashboard/DashboardLayout";
@@ -19,7 +22,7 @@ import UpdateBook from "../Pages/dashboard/EditBook/UpdateBook";
 import ManageBooks from "../pages/dashboard/manageBooks/ManageBooks";
 import UserDashboard from "../pages/dashboard/users/UserDashboard";
 import Home from "../pages/home/Home";
-import PrivateRoute from "./PrivateRoute";
+
 
 const router = createBrowserRouter([
     {
@@ -76,6 +79,9 @@ const router = createBrowserRouter([
         {
           path: "/user-dashboard",
           element: <PrivateRoute><UserDashboard/></PrivateRoute>
+        },
+        {  path: "/wishlist",
+          element: <Wishlist/>
         }
         
       ]

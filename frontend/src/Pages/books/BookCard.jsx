@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"; // Importing heart icons
 import { getImgUrl } from "../../utils/getImgUrl";
 import { Link } from "react-router-dom";
-
 import { useDispatch } from "react-redux";
 import { showAddToCartPopup } from "../../redux/features/cart/cartSlice";
 
 const BookCard = ({ book }) => {
     const dispatch = useDispatch();
     const [isHovered, setIsHovered] = useState(false);
+    const [isLiked, setIsLiked] = useState(false); // State to manage heart button
 
     const handleAddToCart = (product) => {
         // Call the popup function and pass the product
         dispatch(showAddToCartPopup(product));
+    };
+
+    const toggleHeart = () => {
+        setIsLiked(!isLiked); // Toggle heart button state
     };
 
     return (
@@ -26,12 +31,8 @@ const BookCard = ({ book }) => {
                 transition: "box-shadow 0.3s ease-in-out", // Smooth transition on hover
                 margin: "16px", // Add spacing around the card
             }}
-            onMouseEnter={() =>
-                setIsHovered(true) // Enhance shadow on hover
-            }
-            onMouseLeave={() =>
-                setIsHovered(false) // Reset shadow on leave
-            }
+            onMouseEnter={() => setIsHovered(true)} // Enhance shadow on hover
+            onMouseLeave={() => setIsHovered(false)} // Reset shadow on leave
         >
             <div
                 className="sm:h-72 sm:w-48 flex-shrink-0 border rounded-md overflow-hidden"
@@ -45,7 +46,7 @@ const BookCard = ({ book }) => {
                     />
                 </Link>
             </div>
-            <div className="flex flex-col justify-between flex-grow">
+            <div className="flex flex-col justify-between flex-grow relative">
                 <Link to={`/books/${book._id}`}>
                     <h3
                         className="text-xl font-semibold hover:text-blue-600 mb-2"
@@ -54,6 +55,22 @@ const BookCard = ({ book }) => {
                         {book?.title}
                     </h3>
                 </Link>
+
+                {/* Heart Button */}
+                <button
+                    onClick={toggleHeart}
+                    className="absolute top-2 right-2"
+                    style={{
+                        fontSize: "24px",
+                        color: isLiked ? "red" : "gray", // Red for liked, gray otherwise
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                        transition: "color 0.3s ease",
+                    }}
+                >
+                    {isLiked ? <AiFillHeart /> : <AiOutlineHeart />}
+                </button>
 
                 <p
                     className="text-gray-600 mb-5 line-clamp-3"
