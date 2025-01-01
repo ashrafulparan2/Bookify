@@ -1,9 +1,9 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { MdIncompleteCircle } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import getBaseUrl from '../../utils/baseURL';
-import { MdIncompleteCircle } from 'react-icons/md'
 import RevenueChart from './RevenueChart';
 
 const Dashboard = () => {
@@ -56,7 +56,7 @@ const Dashboard = () => {
                   </svg>
                 </div>
                 <div>
-                  <span className="block text-2xl font-bold">${data?.totalSales}</span>
+                  <span className="block text-2xl font-bold">৳{data?.totalSales}</span>
                   <span className="block text-gray-500">Total Sales</span>
                 </div>
               </div>
