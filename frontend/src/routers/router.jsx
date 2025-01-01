@@ -9,12 +9,14 @@ import CheckoutPage from "../Pages/books/CheckoutPage";
 import CartPage from "../Pages/books/CartPage";
 import PrivateRoute from "./PrivateRoute";
 import SingleBook from "../Pages/books/SingleBook";
-import OrderPage from "../pages/books/OrderPage";
+// import OrderPage from "../pages/books/OrderPage";
 import { AllBooksPage } from "../Pages/books/AllBooksPage";
 import AdminRoute from "./AdminRoute";
 import AdminLogin from "../components/AdminLogin";
 import ResetPassword from "../components/ResetPassword";
 import PasswordReset from "../components/PasswordReset";
+import Wishlist from "../Pages/books/Wishlist";
+import OrderPage from "../Pages/books/OrderPage";
 
 
 const router = createBrowserRouter([
@@ -64,6 +66,9 @@ const router = createBrowserRouter([
         },
         {  path: "/allbooks",
           element: <AllBooksPage/>
+        },
+        {  path: "/wishlist",
+          element: <Wishlist/>
         }
       ]
     },
