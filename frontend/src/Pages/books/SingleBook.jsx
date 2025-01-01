@@ -12,13 +12,14 @@ import {
   useFetchAllBooksQuery
 } from '../../redux/features/books/booksApi'
 
-// TODO: import BookCard here
-// Example: 
-import BookCard from './BookCard';
+// Import your BookCard component
+import BookCard from './BookCard'
 
 const SingleBook = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
+
+  const [isHoveredCart, setIsHoveredCart] = useState(false)
 
   // ---- RTK Query for this single book ----
   const {
@@ -34,18 +35,16 @@ const SingleBook = () => {
     isError: isAllError
   } = useFetchAllBooksQuery()
 
-  const [isHoveredCart, setIsHoveredCart] = useState(false)
-
   const handleAddToCart = (product) => {
     dispatch(showAddToCartPopup(product))
   }
 
-  // Loading and Error states for the single book
+  // Loading and error states for single book
   if (isLoading) return <div>Loading...</div>
   if (isError) return <div>Error happened while loading book info</div>
   if (!book) return <div>No book found!</div>
 
-  // Filter out up to 5 "related books" that share category, excluding this book's id
+  // Filter out up to 5 related books in the same category (exclude this book)
   let relatedBooks = []
   if (allBooks && !isAllLoading && !isAllError) {
     relatedBooks = allBooks
@@ -54,19 +53,25 @@ const SingleBook = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto shadow-xl rounded-2xl p-10 bg-white flex flex-col lg:flex-row gap-8">
-      
+    <div
+      className="
+        max-w-6xl mx-auto
+        shadow-xl rounded-2xl p-10
+        bg-white
+        flex flex-col lg:flex-row items-start
+        gap-8
+      "
+    >
       {/* LEFT: Single Book Details */}
-      <div className="w-full lg:w-3/4 flex flex-col lg:flex-row bg-white rounded-2xl">
+      <div className="w-full lg:w-3/4 flex flex-col lg:flex-row gap-8">
         
         {/* Book Cover + Add to Cart */}
-        <div className="flex flex-col items-center lg:w-1/3 mb-6 lg:mb-0">
+        <div className="flex flex-col items-center lg:w-1/3">
           <img
             src={getImgUrl(book.coverImage)}
             alt={book.title}
             className="w-full h-[400px] lg:h-[500px] object-cover rounded-lg shadow-lg mb-4"
           />
-
           <button
             onClick={() => handleAddToCart(book)}
             className="flex items-center justify-center bg-primary lg:min-w-32 sm:px-2 sm:py-1 md:px-4 md:py-2 lg:px-12 lg:py-4"
@@ -102,34 +107,33 @@ const SingleBook = () => {
         </div>
 
         {/* Book Info + Description */}
-        <div className="lg:w-2/3 lg:pl-8 flex flex-col justify-center items-start text-left">
-          
+        <div className="lg:w-2/3 flex flex-col justify-center text-left space-y-4">
           {/* Title */}
-          <h1 className="text-3xl font-bold mb-2">{book.title}</h1>
+          <h1 className="text-3xl font-bold">{book.title}</h1>
 
           {/* Trending Badge */}
           {book.trending && (
-            <span className="inline-block bg-red-600 text-white px-3 py-1 rounded-full text-sm mb-4">
+            <span className="inline-block bg-red-600 text-white px-3 py-1 rounded-full text-sm">
               Trending
             </span>
           )}
 
           {/* Author & Publish Date */}
-          <p className="text-gray-700 mb-2">
+          <p className="text-gray-700">
             <strong>Author:</strong> {book.author || 'admin'}
           </p>
-          <p className="text-gray-700 mb-4">
+          <p className="text-gray-700">
             <strong>Published:</strong>{' '}
             {new Date(book?.createdAt).toLocaleDateString()}
           </p>
 
           {/* Category */}
-          <p className="text-gray-700 mb-4 capitalize">
+          <p className="text-gray-700 capitalize">
             <strong>Category:</strong> {book?.category}
           </p>
 
           {/* Price */}
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2">
             {book.oldPrice && (
               <span className="text-gray-500 line-through">
                 ৳ {book.oldPrice}
@@ -143,7 +147,7 @@ const SingleBook = () => {
           </div>
 
           {/* Description */}
-          <p className="text-gray-700 mb-4 text-justify">
+          <p className="text-gray-700 text-justify">
             <strong>Description:</strong> {book.description}
           </p>
         </div>
@@ -153,20 +157,20 @@ const SingleBook = () => {
       <div className="w-full lg:w-1/4">
         <h2 className="text-2xl font-bold mb-4">Related Books</h2>
 
-        {/* Loading/Error states for allBooks (rarely needed if fetchAllBooks is quick) */}
+        {/* If the "all books" query is still loading or errored */}
         {isAllLoading && <p>Loading related books...</p>}
         {isAllError && <p>Error loading related books!</p>}
 
-        {/* If we have related books, map them */}
-        {relatedBooks.length > 0 ? (
-          relatedBooks.map((relatedBook) => (
-            
-            <BookCard key={relatedBook._id} book={relatedBook} />
-            
-          ))
-        ) : (
-          <p className="text-gray-500">No related books found.</p>
-        )}
+        {/* Render the related books with some vertical spacing */}
+        <div className="space-y-4">
+          {relatedBooks.length > 0 ? (
+            relatedBooks.map((relatedBook) => (
+              <BookCard key={relatedBook._id} book={relatedBook} />
+            ))
+          ) : (
+            <p className="text-gray-500">No related books found.</p>
+          )}
+        </div>
       </div>
     </div>
   )
