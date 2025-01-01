@@ -10,7 +10,7 @@ import SingleBook from "../pages/books/SingleBook";
 import AddBook from "../pages/dashboard/addBook/AddBook";
 import Dashboard from "../pages/dashboard/Dashboard";
 import DashboardLayout from "../pages/dashboard/DashboardLayout";
-import UpdateBook from "../pages/dashboard/EditBook/UpdateBook";
+import UpdateBook from "../Pages/dashboard/EditBook/UpdateBook";
 import ManageBooks from "../pages/dashboard/manageBooks/ManageBooks";
 import UserDashboard from "../pages/dashboard/users/UserDashboard";
 import Home from "../pages/home/Home";
