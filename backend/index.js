@@ -18,11 +18,9 @@ app.use(cors({
 
 const bookRoutes = require('./src/books/book.route')
 const userRoutes = require('./src/users/user.route')
-const orderRoutes = require('./src/orders/order.route')
-
-app.use("/api/books", bookRoutes)
-app.use("/api/auth", userRoutes)
-app.use("/api/orders", orderRoutes)
+const orderRoutes = require('./src/orders/order.route');
+// const Wishlist = require('./src/wishlist/wishlist.model');
+const wishlist = require('./src/wishlist/wishlist.route')
 
 async function main(){
     await mongoose.connect(process.env.DB_URL);
@@ -32,7 +30,13 @@ async function main(){
     })
 }
 
+
 main().then(()=> console.log("MongDB connected")).catch(err=> console.log(err));
+
+app.use("/api/books", bookRoutes)
+app.use("/api/auth", userRoutes)
+app.use("/api/orders", orderRoutes)
+app.use("/api/wishlist", wishlist)
 
 app.listen(port, (err, res) => {
     console.log('listening on port '+ port);
