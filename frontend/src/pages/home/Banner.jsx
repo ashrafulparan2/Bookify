@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Carousel } from 'react-responsive-carousel';
+import React, { useState } from "react";
+import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 import bannerImg1 from "../../assets/banner1.jpg";
 import bannerImg2 from "../../assets/banner2.png";
 import bannerImg3 from "../../assets/banner3.png";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -21,12 +21,12 @@ const Banner = () => {
   };
 
   return (
-    <div className='flex flex-col md:flex-row-reverse py-16 justify-between items-center gap-12'>
+    <div className="flex flex-col md:flex-row-reverse py-3 justify-between items-center gap-12">
       {/* Carousel */}
-      <div className='md:w-1/2 w-full flex items-center md:justify-end'>
+      <div className="md:w-1/2 w-full flex items-center md:justify-end">
         <Carousel
           showThumbs={false}
-          autoPlay = {true}
+          autoPlay={true}
           infiniteLoop
           interval={2000}
           stopOnHover
@@ -45,15 +45,16 @@ const Banner = () => {
       </div>
 
       {/* Text Section */}
-      <div className='md:w-1/2 w-full'>
-      <h2
+      <div className="md:w-1/2 w-full">
+        <h2
           style={animationStyle}
           className="md:text-3xl text-2xl font-medium mb-7 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text"
         >
           পাঠে নতুন দিগন্ত, বইয়ের সাথে বন্ধুত্ব
         </h2>
         <p style={animationStyle} className="mb-10">
-          আপনার প্রিয় বই এখন এক ক্লিকে – সহজে বই কিনুন, নতুন বইয়ের কালেকশন আবিষ্কার করুন এবং সেরা অফারে আপনার বুকশেলফ সাজান আমাদের বুকস্টোর থেকে!
+          আপনার প্রিয় বই এখন এক ক্লিকে – সহজে বই কিনুন, নতুন বইয়ের কালেকশন
+          আবিষ্কার করুন এবং সেরা অফারে আপনার বুকশেলফ সাজান আমাদের বুকস্টোর থেকে!
         </p>
 
         {/* Button with hover and transition effects */}
@@ -76,7 +77,6 @@ const Banner = () => {
         >
           <Link to={`/allbooks`}>কিনুন</Link>
         </button>
-
       </div>
       <style>
         {`
