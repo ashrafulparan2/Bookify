@@ -8,6 +8,7 @@ export const Wishlist = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [likedBooks, setLikedBooks] = useState([]); // Track liked books
 
     const booksPerPage = 30;
 
@@ -39,6 +40,18 @@ export const Wishlist = () => {
         }
     };
 
+    const handleLikeToggle = (bookId) => {
+        setLikedBooks((prevLikedBooks) => {
+            if (prevLikedBooks.includes(bookId)) {
+                // If already liked, remove it from the list
+                return prevLikedBooks.filter((id) => id !== bookId);
+            } else {
+                // If not liked, add it to the list
+                return [...prevLikedBooks, bookId];
+            }
+        });
+    };
+
     if (loading) return <div>Loading books...</div>;
     if (error) return <div>{error}</div>;
 
@@ -49,9 +62,16 @@ export const Wishlist = () => {
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                {currentBooks.map((book) => (
-                    <BookCard key={book._id} book={book} />
-                ))}
+                {currentBooks
+                    .filter((book) => !likedBooks.includes(book._id)) // Filter out disliked books
+                    .map((book) => (
+                        <BookCard
+                            key={book._id}
+                            book={book}
+                            isLiked={likedBooks.includes(book._id)} // Pass the like status
+                            onLikeToggle={handleLikeToggle} // Pass the function to toggle like
+                        />
+                    ))}
             </div>
 
             {/* Pagination */}
