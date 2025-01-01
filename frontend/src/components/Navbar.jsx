@@ -146,6 +146,15 @@ const Navbar = () => {
               </div>
             )}
           </div>
+          {/* ---- New Books Link ---- */}
+        <div>
+            <Link
+              to="/allbooks"
+              className="text-gray-700 font-semibold hover:text-gray-500 transition-colors"
+            >
+              Books
+            </Link>
+        </div>
         </div>
 
         {/* Right Section */}
