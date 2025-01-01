@@ -52,6 +52,10 @@ const UpdateBook = () => {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, It's Okay!"
+      }).then((result) => {
+        if (result.isConfirmed){
+          window.location.href = "/manage-books"
+        }
       });
       await refetch()
     } catch (error) {
@@ -86,11 +90,13 @@ const UpdateBook = () => {
           name="category"
           options={[
             { value: '', label: 'Choose A Category' },
-            { value: 'business', label: 'Business' },
-            { value: 'technology', label: 'Technology' },
-            { value: 'fiction', label: 'Fiction' },
-            { value: 'horror', label: 'Horror' },
-            { value: 'adventure', label: 'Adventure' },
+            { value: 'ইতিহাস ও ঐতিহ্য', label: 'ইতিহাস ও ঐতিহ্য' },
+            { value: 'উপন্যাস', label: 'উপন্যাস' },
+            { value: 'গণিত, বিজ্ঞান ও প্রযুক্তি', label: 'গণিত, বিজ্ঞান ও প্রযুক্তি' },
+            { value: 'ছড়া, কবিতা ও আবৃত্তি', label: 'ছড়া, কবিতা ও আবৃত্তি' },
+            { value: 'থ্রিলার', label: 'থ্রিলার' },
+            { value: 'ধর্মীয়', label: 'ধর্মীয়'},
+            { value: 'প্রবন্ধ', label: 'প্রবন্ধ'}
           ]}
           register={register}
         />
@@ -105,20 +111,22 @@ const UpdateBook = () => {
           </label>
         </div>
 
-        <InputField
+        {/* <InputField
           label="Old Price"
           name="oldPrice"
           type="number"
           placeholder="Old Price"
           register={register}
-        />
+        /> */}
 
         <InputField
           label="New Price"
           name="newPrice"
-          type="number"
+          type="text"
           placeholder="New Price"
           register={register}
+          inputMode = "decimal"
+          pattern="[0-9]+(\.[0-9]{1,2})?"
         />
 
         <InputField
