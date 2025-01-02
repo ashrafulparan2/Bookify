@@ -23,7 +23,9 @@ const Banner = () => {
   return (
     <div className="flex flex-col md:flex-row-reverse py-3 justify-between items-center gap-12">
       {/* Carousel */}
+      
       <div className="md:w-1/2 w-full flex items-center md:justify-end">
+      <Link to={`/allbooks`}>
         <Carousel
           showThumbs={false}
           autoPlay={true}
@@ -42,6 +44,7 @@ const Banner = () => {
             <img style={imageStyle} src={bannerImg3} alt="Banner 3" />
           </div>
         </Carousel>
+        </Link>
       </div>
 
       {/* Text Section */}
