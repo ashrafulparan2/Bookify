@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { getImgUrl } from "../../utils/getImgUrl";
@@ -12,8 +12,33 @@ const API_BASE_URL = "http://localhost:5000"; // Replace with your back-end serv
 const BookCard = ({ book }) => {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(false); // Initial state for the heart
   const { currentUser } = useAuth(); // Get current user from context
+
+  // Fetch wishlist when the component mounts
+  useEffect(() => {
+    const fetchWishlist = async () => {
+      if (currentUser) {
+        try {
+          const response = await fetch(
+            `${API_BASE_URL}/api/wishlist/${currentUser.email}`
+          );
+          if (!response.ok) {
+            throw new Error("Failed to fetch wishlist");
+          }
+          const wishlist = await response.json();
+
+          // Check if the book is in the wishlist
+          const isBookInWishlist = wishlist.productIds.includes(book._id);
+          setIsLiked(isBookInWishlist); // Set the heart based on wishlist
+        } catch (error) {
+          console.error("Error fetching wishlist:", error);
+        }
+      }
+    };
+
+    fetchWishlist();
+  }, [currentUser, book._id]); // Fetch wishlist when user or book changes
 
   const handleAddToCart = (product) => {
     dispatch(showAddToCartPopup(product));
