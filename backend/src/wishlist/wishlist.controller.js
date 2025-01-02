@@ -2,7 +2,7 @@ const Wishlist = require("./wishlist.model");
 
 const addToWishlist = async (req, res) => {
   try {
-    const { name, email, productIds } = req.body;
+    const { email, productIds } = req.body;
     const newWishlist = await Wishlist.findOneAndUpdate(
       { email },
       { $addToSet: { productIds: { $each: productIds } } },
