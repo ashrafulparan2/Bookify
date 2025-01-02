@@ -91,6 +91,8 @@ const SingleBook = () => {
             className="flex items-center justify-center bg-primary text-white px-8 py-3 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105"
             style={{
               backgroundImage: 'linear-gradient(45deg, #fbd84b, #f0a30a)',
+              color: "#000",
+              fontWeight: "600"
             }}
             onMouseEnter={() => setIsHoveredCart(true)}
             onMouseLeave={() => setIsHoveredCart(false)}
