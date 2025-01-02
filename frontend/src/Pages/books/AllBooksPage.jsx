@@ -253,6 +253,15 @@ export const AllBooksPage = () => {
             {/* Pagination */}
             <div className="flex justify-center gap-4">
                 <button
+                    style={{
+                        color: "#fff",
+                        backgroundImage: "linear-gradient(45deg, #1d3557, #457b9d)",
+                        fontSize: "17px",
+                        borderRadius: "30px",
+                        minWidth: "100px",
+
+                    }}
+
                     onClick={handlePreviousPage}
                     disabled={currentPage === 1}
                     className="px-4 py-2 bg-blue-600 text-white rounded disabled:bg-gray-300"
@@ -260,6 +269,13 @@ export const AllBooksPage = () => {
                     Previous
                 </button>
                 <button
+                    style={{
+                        color: "#fff",
+                        backgroundImage: "linear-gradient(45deg, #1d3557, #457b9d)",
+                        fontSize: "17px",
+                        borderRadius: "30px",
+                        minWidth: "100px",
+                    }}
                     onClick={handleNextPage}
                     disabled={currentPage === totalPages}
                     className="px-4 py-2 bg-blue-600 text-white rounded disabled:bg-gray-300"

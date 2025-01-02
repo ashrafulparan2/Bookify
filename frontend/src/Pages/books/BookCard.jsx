@@ -82,119 +82,128 @@ const BookCard = ({ book }) => {
   };
 
   return (
-    <div
-      className="flex flex-col sm:flex-row sm:items-center sm:h-72 sm:justify-center gap-4"
+    <div className="flex flex-col sm:flex-row sm:items-center sm:h-72 sm:justify-center gap-4"
+  style={{
+    padding: "16px",
+    borderRadius: "8px",
+    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+    backgroundColor: "#fff",
+    transition: "box-shadow 0.3s ease-in-out",
+    margin: "16px",
+  }}
+  onMouseEnter={() => setIsHovered(true)}
+  onMouseLeave={() => setIsHovered(false)}
+>
+  <div
+    className="sm:h-72 sm:w-48 flex-shrink-0 border rounded-md overflow-hidden"
+    style={{ width: "150px", height: "225px" }}
+  >
+    <Link to={`/books/${book._id}`}>
+      <img
+        src={`${getImgUrl(book?.coverImage)}`}
+        alt="Book Cover"
+        className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-all duration-200"
+      />
+    </Link>
+  </div>
+  <div className="flex flex-col justify-between flex-grow relative">
+    <Link to={`/books/${book._id}`}>
+      <h3
+        className="text-xl font-semibold hover:text-blue-600 mb-2 line-clamp-2"
+        style={{
+          minHeight: "2.8em", // Two lines for title
+          maxHeight: "2.8em", // Two lines for title
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          display: "-webkit-box",
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: "vertical",
+          marginRight: "32px", // Ensure space for heart icon
+        }}
+      >
+        {book?.title}
+      </h3>
+    </Link>
+
+    {/* Heart Button */}
+    <button
+      onClick={toggleWishlist}
+      className="absolute right-2 hover:scale-110 transition-transform duration-300"
       style={{
-        padding: "16px",
-        borderRadius: "8px",
-        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-        backgroundColor: "#fff",
-        transition: "box-shadow 0.3s ease-in-out",
-        margin: "16px",
+        fontSize: "24px",
+        color: isLiked ? "red" : "gray",
+        background: "none",
+        border: "none",
+        cursor: "pointer",
+        transition: "color 0.3s ease",
+      }}
+    >
+      {isLiked ? <AiFillHeart /> : <AiOutlineHeart />}
+    </button>
+
+    <p
+      className="text-gray-600 mb-5 line-clamp-3"
+      style={{
+        lineHeight: "1.5",
+        maxHeight: "4.5rem",
+        overflow: "hidden",
+        display: "-webkit-box",
+        WebkitBoxOrient: "vertical",
+        WebkitLineClamp: "3",
+      }}
+    >
+      {book?.description}
+    </p>
+
+    <p className="font-medium mb-5">
+      TK. {book?.newPrice}{" "}
+      <span className="line-through font-normal ml-2">
+        TK. {book?.oldPrice}
+      </span>
+    </p>
+
+    <button
+      onClick={() => handleAddToCart(book)}
+      className="flex items-center justify-center gap-2"
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        textDecoration: "none",
+        minWidth: "150px",
+        width: "auto",
+        height: "40px",
+        color: "#fff",
+        backgroundImage: "linear-gradient(45deg, #fbd84b, #f0a30a)",
+        fontSize: "18px",
+        borderRadius: isHovered ? "30px" : "30px 0px 30px 30px",
+        transition: "all 0.3s ease-in-out",
+        border: "none",
+        cursor: "pointer",
+        transform: isHovered ? "scale(1.1)" : "scale(1)",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div
-        className="sm:h-72 sm:w-48 flex-shrink-0 border rounded-md overflow-hidden"
-        style={{ width: "150px", height: "225px" }}
+      <FiShoppingCart
+        style={{
+          color: "#000",
+          fontSize: "20px",
+        }}
+      />
+      <span
+        style={{
+          color: "#000",
+          fontWeight: "600",
+          fontSize: "16px",
+        }}
       >
-        <Link to={`/books/${book._id}`}>
-          <img
-            src={`${getImgUrl(book?.coverImage)}`}
-            alt="Book Cover"
-            className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-all duration-200"
-          />
-        </Link>
-      </div>
-      <div className="flex flex-col justify-between flex-grow relative">
-        <Link to={`/books/${book._id}`}>
-          <h3
-            className="text-xl font-semibold hover:text-blue-600 mb-2"
-            style={{ minHeight: "60px" }}
-          >
-            {book?.title}
-          </h3>
-        </Link>
+        Add to Cart
+      </span>
+    </button>
+  </div>
+</div>
 
-        {/* Heart Button */}
-        <button
-          onClick={toggleWishlist}
-          className="absolute top-2 right-2"
-          style={{
-            fontSize: "24px",
-            color: isLiked ? "red" : "gray",
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            transition: "color 0.3s ease",
-          }}
-        >
-          {isLiked ? <AiFillHeart /> : <AiOutlineHeart />}
-        </button>
-
-        <p
-          className="text-gray-600 mb-5 line-clamp-3"
-          style={{
-            lineHeight: "1.5",
-            maxHeight: "4.5rem",
-            overflow: "hidden",
-            display: "-webkit-box",
-            WebkitBoxOrient: "vertical",
-            WebkitLineClamp: "3",
-          }}
-        >
-          {book?.description}
-        </p>
-
-        <p className="font-medium mb-5">
-          TK. {book?.newPrice}{" "}
-          <span className="line-through font-normal ml-2">
-            TK. {book?.oldPrice}
-          </span>
-        </p>
-
-        <button
-          onClick={() => handleAddToCart(book)}
-          className="flex items-center justify-center gap-2"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            textDecoration: "none",
-            minWidth: "150px", // Minimum width for the button
-            width: "auto", // Allow width to adjust based on content
-            height: "40px", // Set height for consistency
-            color: "#fff",
-            backgroundImage: "linear-gradient(45deg, #fbd84b, #f0a30a)", // Yellowish gradient
-            fontSize: "18px", // Text size
-            borderRadius: isHovered ? "30px" : "30px 0px 30px 30px", // Conditional border radius
-            transition: "all 0.3s ease-in-out", // Smooth hover transition
-            border: "none", // No borders
-            cursor: "pointer", // Clickable pointer
-            transform: isHovered ? "scale(1.1)" : "scale(1)", // Slight zoom on hover
-          }}
-          onMouseEnter={() => setIsHovered(true)} // Start hover effect
-          onMouseLeave={() => setIsHovered(false)} // End hover effect
-        >
-          <FiShoppingCart
-            style={{
-              color: "#000", // Black icon color
-              fontSize: "20px", // Icon size
-            }}
-          />
-          <span
-            style={{
-              color: "#000", // Black text color
-              fontWeight: "600", // Bold text
-              fontSize: "16px", // Text size
-            }}
-          >
-            Add to Cart
-          </span>
-        </button>
-      </div>
-    </div>
   );
 };
 

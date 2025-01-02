@@ -59,7 +59,7 @@ const news = [
 
 const News = () => {
   return (
-    <div className="py-2">
+    <div className="py-2" style={{paddingTop: "50px", paddingBottom: "50px",}}>
       <h2 className="text-3xl font-semibold mb-6">News </h2>
 
       <Swiper
