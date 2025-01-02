@@ -9,7 +9,6 @@ const addToWishlist = async (req, res) => {
       { new: true, upsert: true } // Create a new document if none exists
     );
     res.status(200).json(newWishlist);
-    console.log("Hi");
   } catch (error) {
     console.error("Error adding to wishlist", error);
     res.status(500).json({ message: "Failed to add to wishlist" });
