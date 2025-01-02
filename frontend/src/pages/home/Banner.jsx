@@ -50,13 +50,17 @@ const Banner = () => {
       {/* Text Section */}
       <Link to={`/allbooks`}>
       <div className="md:w-1/2 w-full">
+      <h2
+  style={{
+    ...animationStyle,
+    padding: '10px 0', // Add padding to ensure there's space around the text
+    lineHeight: '1.5',  // Adjust line height to avoid text being cut off
+  }}
+  className="md:text-3xl text-2xl font-medium mb-7 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text"
+>
+  পাঠে নতুন দিগন্ত, বইয়ের সাথে বন্ধুত্ব
+</h2>
 
-        <h2
-          style={animationStyle}
-          className="md:text-3xl text-2xl font-medium mb-7 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text"
-        >
-          পাঠে নতুন দিগন্ত, বইয়ের সাথে বন্ধুত্ব
-        </h2>
         <p style={animationStyle} className="mb-10">
           আপনার প্রিয় বই এখন এক ক্লিকে – সহজে বই কিনুন, নতুন বইয়ের কালেকশন
           আবিষ্কার করুন এবং সেরা অফারে আপনার বুকশেলফ সাজান আমাদের বুকস্টোর থেকে!
