@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import React, { useState } from 'react';
 
+// Initial cart state
 const initialState = {
     cartItems: [],
 };
@@ -38,74 +38,29 @@ const cartSlice = createSlice({
     },
 });
 
+// Export actions
 export const { addToCart, removeFromCart, clearCart, increaseQuantity, decreaseQuantity } = cartSlice.actions;
 
-// Function to show SweetAlert2 popup and dispatch addToCart
+// Function to show the SweetAlert2 popup and add to the cart
 export const showAddToCartPopup = (product) => async (dispatch, getState) => {
-    // Check if the item is already in the cart
+    // Check if the product already exists in the cart
     const existingItem = getState().cart.cartItems.find(item => item._id === product._id);
-    const initialQuantity = existingItem ? existingItem.quantity : 1;  // Start with 0 if item isn't in cart
 
+    if (existingItem) {
+        // If exists, increase the quantity by 1
+        dispatch(increaseQuantity({ _id: product._id }));
+    } else {
+        // If doesn't exist, add the product with quantity 1
+        dispatch(addToCart({ ...product, quantity: 1 }));
+    }
+
+    // Show confirmation popup
     Swal.fire({
-        title: "Set Quantity",
-        html: `
-            <div class="flex justify-center items-center">
-                <button id="decreaseBtn" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">-</button>
-                <span id="quantity" class="mx-4 text-xl">${initialQuantity}</span>
-                <button id="increaseBtn" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">+</button>
-            </div>
-        `,
-        showCancelButton: true,
-        confirmButtonText: "Add to Cart",
-        confirmButtonColor: "#3085d6",
-        cancelButtonText: "Cancel",
-        cancelButtonColor: "#d33",
-        preConfirm: () => {
-            const quantity = parseInt(document.getElementById("quantity").innerText, 10);
-            return quantity > 0 ? quantity : Swal.showValidationMessage("Quantity must be greater than 0");
-        },
-        didOpen: () => {
-            let quantity = initialQuantity;
-            const quantityElement = document.getElementById("quantity");
-            const decreaseBtn = document.getElementById("decreaseBtn");
-            const increaseBtn = document.getElementById("increaseBtn");
-            const confirmButton = Swal.getConfirmButton();
-
-            confirmButton.disabled = quantity === 0; // Disable button initially if quantity is 0
-
-            const updateButtonState = () => {
-                confirmButton.disabled = quantity === 0; // Enable only if quantity > 0
-            };
-
-            decreaseBtn.addEventListener("click", () => {
-                if (quantity > 0) {
-                    quantity--;
-                    quantityElement.innerText = quantity;
-                    updateButtonState();
-                }
-            });
-
-            increaseBtn.addEventListener("click", () => {
-                quantity++;
-                quantityElement.innerText = quantity;
-                updateButtonState();
-            });
-        },
-    }).then((result) => {
-        if (result.isConfirmed) {
-            const quantity = result.value;
-            dispatch(addToCart({ ...product, quantity }));
-
-            // Show confirmation popup
-            Swal.fire({
-                icon: "success",
-                title: "Product Added to the Cart",
-                showConfirmButton: false,
-                timer: 1500,
-            });
-        }
+        icon: "success",
+        title: "Book added to the cart successfully!",
+        showConfirmButton: false,
+        timer: 1500,
     });
 };
-
 
 export default cartSlice.reducer;

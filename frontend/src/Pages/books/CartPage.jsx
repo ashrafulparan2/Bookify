@@ -129,7 +129,7 @@ const CartPage = () => {
                             <ul role="list" className="-my-6 divide-y divide-gray-200">
                                 {cartItems.map((product) => (
                                     <li key={product._id} className="flex py-6">
-                                        <div className="h-32 w-32 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                        <div className="h-40 w-32 flex-shrink-0 overflow-hidden rounded-md border border-gray-200"> {/* Increased height */}
                                             <img
                                                 alt="Product"
                                                 src={getImgUrl(product?.coverImage)}
