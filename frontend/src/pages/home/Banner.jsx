@@ -58,6 +58,7 @@ const Banner = () => {
         </p>
 
         {/* Button with hover and transition effects */}
+        <Link to={`/allbooks`}>
         <button
           style={{
             display: "inline-block",
@@ -75,8 +76,9 @@ const Banner = () => {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          <Link to={`/allbooks`}>কিনুন</Link>
+          কিনুন
         </button>
+        </Link>
       </div>
       <style>
         {`
