@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BookCard from "./BookCard"; // Assuming BookCard is in the same folder
+import GetBaseUrl from "../../utils/baseURL";
 
 export const AllBooksPage = () => {
     const [books, setBooks] = useState([]);
@@ -24,7 +25,7 @@ export const AllBooksPage = () => {
     useEffect(() => {
         const fetchBooks = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/books`);
+                const response = await axios.get(`${GetBaseUrl()}/api/books`);
                 setBooks(response.data);
                 setFilteredBooks(response.data);
                 setTotalPages(Math.ceil(response.data.length / booksPerPage));

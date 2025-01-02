@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BookCard from "./BookCard"; // Assuming BookCard is in the same folder
 import { useAuth } from "../../context/AuthContext"; // Assuming useAuth provides current user
+import GetBaseUrl from "../../utils/baseURL";
 
 export const Wishlist = () => {
   const { currentUser } = useAuth(); // Get current user from context
@@ -20,14 +21,14 @@ export const Wishlist = () => {
       try {
         // Fetch all books
         const booksResponse = await axios.get(
-          `http://localhost:5000/api/books`
+          `${GetBaseUrl()}/api/books`
         );
         setBooks(booksResponse.data);
 
         // Fetch the user's wishlist if the user is logged in
         if (currentUser) {
           const wishlistResponse = await axios.get(
-            `http://localhost:5000/api/wishlist/${currentUser.email}`
+            `${GetBaseUrl()}/api/wishlist/${currentUser.email}`
           );
           const wishlist = wishlistResponse.data.productIds; // Assuming wishlist contains an array of productIds
 

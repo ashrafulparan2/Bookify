@@ -6,6 +6,7 @@ import logoImg from "../assets/logo.png"; // Add your logo image here
 import { useSelector } from "react-redux";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
+import GetBaseUrl from "../utils/baseURL";
 
 const navigation = [
   { name: "Dashboard", href: "/user-dashboard" },
@@ -32,7 +33,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchAllBooks = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/books");
+        const response = await axios.get(`${GetBaseUrl()}/api/books`);
         setAllBooks(response.data);
       } catch (error) {
         console.error("Error fetching all books", error);
