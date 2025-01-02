@@ -9,7 +9,6 @@ export const AllBooksPage = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [wishlist, setWishlist] = useState([]);  // State to manage wishlist
 
     const [filters, setFilters] = useState({
         priceRange: [0, 1000],
@@ -99,17 +98,6 @@ export const AllBooksPage = () => {
         }
     };
 
-    // Function to handle adding/removing books from the wishlist
-    const toggleWishlist = (bookId) => {
-        setWishlist((prevWishlist) => {
-            if (prevWishlist.includes(bookId)) {
-                return prevWishlist.filter(id => id !== bookId); // Remove from wishlist
-            } else {
-                return [...prevWishlist, bookId]; // Add to wishlist
-            }
-        });
-    };
-
     const handleFilterChange = (e) => {
         const { name, value, type, checked } = e.target;
         if (type === "checkbox") {
@@ -132,15 +120,15 @@ export const AllBooksPage = () => {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            {/* <h1 className="text-2xl font-bold text-center mb-4">All Books</h1> */}
-
-            {/* Condensed Filters */}
-            <div className="mb-4 p-2 bg-white rounded-md shadow-sm flex flex-wrap gap-4 items-end">
+            {/* Filters Section */}
+            <div
+                className="mb-6 p-6 shadow-lg bg-white rounded-md grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
+            >
                 {/* Price Range */}
-                <div className="flex flex-col min-w-[150px]">
-                    <label className="text-sm font-semibold mb-1">Price Range</label>
-                    <div className="text-xs flex flex-col gap-1">
-                        <div className="flex items-center gap-2">
+                <div>
+                    <label className="block text-lg font-medium mb-2">Price Range</label>
+                    <div className="text-base">
+                        <div className="flex items-center gap-3">
                             <span>৳{filters.priceRange[0]}</span>
                             <input
                                 type="range"
@@ -160,7 +148,7 @@ export const AllBooksPage = () => {
                                 className="w-full"
                             />
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-3 mt-2">
                             <span>৳{filters.priceRange[1]}</span>
                             <input
                                 type="range"
@@ -184,8 +172,8 @@ export const AllBooksPage = () => {
                 </div>
 
                 {/* Category */}
-                <div className="flex flex-col min-w-[120px]">
-                    <label className="text-sm font-semibold mb-1" htmlFor="category">
+                <div>
+                    <label className="block text-lg font-medium mb-2" htmlFor="category">
                         Category
                     </label>
                     <select
@@ -193,7 +181,7 @@ export const AllBooksPage = () => {
                         name="category"
                         value={filters.category}
                         onChange={handleFilterChange}
-                        className="border border-gray-300 rounded p-1 text-sm"
+                        className="w-full border border-gray-300 rounded-full p-3 text-black"
                     >
                         <option value="">All</option>
                         <option value="ইতিহাস ও ঐতিহ্য">ইতিহাস ও ঐতিহ্য</option>
@@ -207,30 +195,33 @@ export const AllBooksPage = () => {
                 </div>
 
                 {/* Trending & Discount Checkboxes */}
-                <div className="flex items-center gap-4">
-                    <label className="flex items-center text-sm">
-                        <input
-                            type="checkbox"
-                            name="trending"
-                            onChange={handleFilterChange}
-                            className="mr-1"
-                        />
-                        Trending
-                    </label>
-                    <label className="flex items-center text-sm">
-                        <input
-                            type="checkbox"
-                            name="discount"
-                            onChange={handleFilterChange}
-                            className="mr-1"
-                        />
-                        Discount
-                    </label>
+                <div>
+                    <label className="block text-lg font-medium mb-2">Options</label>
+                    <div className="flex items-center gap-4">
+                        <label className="flex items-center text-base">
+                            <input
+                                type="checkbox"
+                                name="trending"
+                                onChange={handleFilterChange}
+                                className="mr-2"
+                            />
+                            Trending
+                        </label>
+                        <label className="flex items-center text-base">
+                            <input
+                                type="checkbox"
+                                name="discount"
+                                onChange={handleFilterChange}
+                                className="mr-2"
+                            />
+                            Discount
+                        </label>
+                    </div>
                 </div>
 
                 {/* Sort By */}
-                <div className="flex flex-col min-w-[110px]">
-                    <label className="text-sm font-semibold mb-1" htmlFor="sortOption">
+                <div>
+                    <label className="block text-lg font-medium mb-2" htmlFor="sortOption">
                         Sort By
                     </label>
                     <select
@@ -238,7 +229,7 @@ export const AllBooksPage = () => {
                         name="sortOption"
                         value={sortOption}
                         onChange={handleSortChange}
-                        className="border border-gray-300 rounded p-1 text-sm"
+                        className="w-full border border-gray-300 rounded-full p-3 text-black"
                     >
                         <option value="">Select</option>
                         <option value="priceAsc">Price (Low to High)</option>
@@ -263,14 +254,14 @@ export const AllBooksPage = () => {
                 <button
                     onClick={handlePreviousPage}
                     disabled={currentPage === 1}
-                    className="px-4 py-1 bg-blue-500 text-white text-sm rounded disabled:bg-gray-300"
+                    className="px-4 py-2 bg-blue-600 text-white rounded disabled:bg-gray-300"
                 >
                     Previous
                 </button>
                 <button
                     onClick={handleNextPage}
                     disabled={currentPage === totalPages}
-                    className="px-4 py-1 bg-blue-500 text-white text-sm rounded disabled:bg-gray-300"
+                    className="px-4 py-2 bg-blue-600 text-white rounded disabled:bg-gray-300"
                 >
                     Next
                 </button>

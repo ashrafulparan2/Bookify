@@ -1,115 +1,76 @@
-import React, { useState } from 'react'
-import { FiShoppingCart } from "react-icons/fi"
-import { useParams } from "react-router-dom"
-import { useDispatch } from 'react-redux'
+import React, { useState } from 'react';
+import { FiShoppingCart } from "react-icons/fi";
+import { useParams } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 
-import { getImgUrl } from '../../utils/getImgUrl'
-import { showAddToCartPopup } from '../../redux/features/cart/cartSlice'
+import { getImgUrl } from '../../utils/getImgUrl';
+import { showAddToCartPopup } from '../../redux/features/cart/cartSlice';
 
-// IMPORT your queries
+// Import queries and components
 import {
   useFetchBookByIdQuery,
   useFetchAllBooksQuery
-} from '../../redux/features/books/booksApi'
-
-// Import your BookCard component
-import BookCard from './BookCard'
+} from '../../redux/features/books/booksApi';
+import BookCard from './BookCard';
 
 const SingleBook = () => {
-  const { id } = useParams()
-  const dispatch = useDispatch()
+  const { id } = useParams();
+  const dispatch = useDispatch();
 
-  const [isHoveredCart, setIsHoveredCart] = useState(false)
+  const [isHoveredCart, setIsHoveredCart] = useState(false);
 
-  // ---- RTK Query for this single book ----
-  const {
-    data: book,
-    isLoading,
-    isError
-  } = useFetchBookByIdQuery(id)
+  // RTK Query for single book
+  const { data: book, isLoading, isError } = useFetchBookByIdQuery(id);
 
-  // ---- RTK Query for all books (to find related) ----
-  const {
-    data: allBooks,
-    isLoading: isAllLoading,
-    isError: isAllError
-  } = useFetchAllBooksQuery()
+  // RTK Query for all books to find related books
+  const { data: allBooks, isLoading: isAllLoading, isError: isAllError } = useFetchAllBooksQuery();
 
   const handleAddToCart = (product) => {
-    dispatch(showAddToCartPopup(product))
-  }
+    dispatch(showAddToCartPopup(product));
+  };
 
   // Loading and error states for single book
-  if (isLoading) return <div>Loading...</div>
-  if (isError) return <div>Error happened while loading book info</div>
-  if (!book) return <div>No book found!</div>
+  if (isLoading) return <div className="text-center">Loading...</div>;
+  if (isError) return <div className="text-center text-red-500">Error occurred while loading book info</div>;
+  if (!book) return <div className="text-center text-gray-500">No book found!</div>;
 
-  // Filter out up to 5 related books in the same category (exclude this book)
-  let relatedBooks = []
+  // Filter related books based on category and exclude the current book
+  let relatedBooks = [];
   if (allBooks && !isAllLoading && !isAllError) {
     relatedBooks = allBooks
       .filter((b) => b.category === book.category && b._id !== book._id)
-      .slice(0, 5)
+      .slice(0, 6);
   }
 
   return (
-    <div
-      className="
-        max-w-6xl mx-auto
-        shadow-xl rounded-2xl p-10
-        bg-white
-        flex flex-col lg:flex-row items-start
-        gap-8
-      "
-    >
-      {/* LEFT: Single Book Details */}
-      <div className="w-full lg:w-3/4 flex flex-col lg:flex-row gap-8">
-        
-        {/* Book Cover + Add to Cart */}
-        <div className="flex flex-col items-center lg:w-1/3">
+    <div className="max-w-7xl mx-auto p-8 space-y-8 bg-white shadow-xl rounded-2xl">
+      
+      {/* Single Book Details Section */}
+      <div className="lg:flex lg:gap-16 space-y-8 lg:space-y-0">
+        {/* Left: Book Cover + Add to Cart */}
+        <div className="lg:w-1/3 flex flex-col items-center">
           <img
             src={getImgUrl(book.coverImage)}
             alt={book.title}
-            className="w-full h-[400px] lg:h-[500px] object-cover rounded-lg shadow-lg mb-4"
+            className="w-full h-[400px] lg:h-[500px] object-cover rounded-xl shadow-lg mb-6"
           />
           <button
             onClick={() => handleAddToCart(book)}
-            className="flex items-center justify-center bg-primary lg:min-w-32 sm:px-2 sm:py-1 md:px-4 md:py-2 lg:px-12 lg:py-4"
+            className="flex items-center justify-center bg-primary text-white px-8 py-3 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105"
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textDecoration: 'none',
-              minWidth: '200px',
-              width: 'auto',
-              height: '40px',
-              color: '#000',
               backgroundImage: 'linear-gradient(45deg, #fbd84b, #f0a30a)',
-              fontSize: '18px',
-              borderRadius: isHoveredCart ? '30px' : '30px 0px 30px 30px',
-              transition: 'all 0.3s ease-in-out',
-              border: 'none',
-              cursor: 'pointer',
-              transform: isHoveredCart ? 'scale(1.1)' : 'scale(1)',
             }}
             onMouseEnter={() => setIsHoveredCart(true)}
             onMouseLeave={() => setIsHoveredCart(false)}
           >
-            <FiShoppingCart
-              style={{
-                color: '#000',
-                fontSize: '20px',
-                marginRight: '8px',
-              }}
-            />
+            <FiShoppingCart className="mr-3" style={{ fontSize: '20px' }} />
             <span>Add to Cart</span>
           </button>
         </div>
 
-        {/* Book Info + Description */}
-        <div className="lg:w-2/3 flex flex-col justify-center text-left space-y-4">
-          {/* Title */}
-          <h1 className="text-3xl font-bold">{book.title}</h1>
+        {/* Right: Book Information and Description */}
+        <div className="lg:w-2/3 flex flex-col justify-center space-y-6 text-left">
+          <h1 className="text-3xl font-bold text-gray-800">{book.title}</h1>
 
           {/* Trending Badge */}
           {book.trending && (
@@ -119,63 +80,45 @@ const SingleBook = () => {
           )}
 
           {/* Author & Publish Date */}
-          <p className="text-gray-700">
-            <strong>Author:</strong> {book.author || 'admin'}
-          </p>
-          <p className="text-gray-700">
-            <strong>Published:</strong>{' '}
-            {new Date(book?.createdAt).toLocaleDateString()}
-          </p>
+          <p className="text-gray-700"><strong>Author:</strong> {book.author || 'admin'}</p>
+          <p className="text-gray-700"><strong>Published:</strong> {new Date(book?.createdAt).toLocaleDateString()}</p>
 
           {/* Category */}
-          <p className="text-gray-700 capitalize">
-            <strong>Category:</strong> {book?.category}
-          </p>
+          <p className="text-gray-700 capitalize"><strong>Category:</strong> {book?.category}</p>
 
           {/* Price */}
           <div className="flex items-center gap-2">
-            {book.oldPrice && (
-              <span className="text-gray-500 line-through">
-                ৳ {book.oldPrice}
-              </span>
-            )}
-            {book.newPrice && (
-              <span className="text-xl font-bold text-green-600">
-                ৳ {book.newPrice}
-              </span>
-            )}
+            {book.oldPrice && <span className="text-gray-500 line-through">৳ {book.oldPrice}</span>}
+            {book.newPrice && <span className="text-xl font-bold text-green-600">৳ {book.newPrice}</span>}
           </div>
 
           {/* Description */}
-          <p className="text-gray-700 text-justify">
-            <strong>Description:</strong> {book.description}
-          </p>
+          <p className="text-gray-700 text-justify"><strong>Description:</strong> {book.description}</p>
         </div>
       </div>
       
 
-      {/* RIGHT: Related Books */}
-      <div className="w-full lg:w-1/4">
-        <h2 className="text-2xl font-bold mb-4">Related Books</h2>
+    {/* Related Books Section */}
+    <div className="mt-8" style={{ paddingTop: "2rem" }}>
+      <h2 className="text-2xl font-bold text-gray-800 mb-4">Related Books</h2>
 
-        {/* If the "all books" query is still loading or errored */}
-        {isAllLoading && <p>Loading related books...</p>}
-        {isAllError && <p>Error loading related books!</p>}
+      {/* Loading or Error States for Related Books */}
+      {isAllLoading && <p className="text-center text-gray-500">Loading related books...</p>}
+      {isAllError && <p className="text-center text-red-500">Error occurred while loading related books!</p>}
 
-        {/* Render the related books with some vertical spacing */}
-        <div className="space-y-4">
-          {relatedBooks.length > 0 ? (
-            relatedBooks.map((relatedBook) => (
-              <BookCard key={relatedBook._id} book={relatedBook} />
-            ))
-          ) : (
-            <p className="text-gray-500">No related books found.</p>
-          )}
-        </div>
-      </div> 
+      {/* Related Books List */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {relatedBooks.length > 0 ? (
+          relatedBooks.map((relatedBook) => (
+            <BookCard key={relatedBook._id} book={relatedBook} />
+          ))
+        ) : (
+          <p className="text-center text-gray-500">No related books found.</p>
+        )}
+      </div>
     </div>
-    
+  </div>
   );
 };
 
-export default SingleBook
+export default SingleBook;

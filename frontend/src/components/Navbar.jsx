@@ -18,8 +18,7 @@ const Navbar = () => {
   const [isHoveredHeart, setIsHoveredHeart] = useState(false);
   const [isHoveredCart, setIsHoveredCart] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-  const [isSuggestionsDropdownOpen, setIsSuggestionsDropdownOpen] =
-    useState(false);
+  const [isSuggestionsDropdownOpen, setIsSuggestionsDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [allBooks, setAllBooks] = useState([]);
@@ -28,6 +27,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
   const profileButtonRef = useRef(null);
+  const [isHoveredBooks, setIsHoveredBooks] = useState(false); // Added state for books hover
 
   useEffect(() => {
     const fetchAllBooks = async () => {
@@ -110,12 +110,7 @@ const Navbar = () => {
           </Link>
 
           {/* Search Bar */}
-          <div
-            className="relative flex-grow max-w-full sm:max-w-xs md:max-w-md"
-            style={{
-              minWidth: "110px",
-            }}
-          >
+          <div className="relative flex-grow max-w-full sm:max-w-xs md:max-w-md" style={{ minWidth: "110px" }}>
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             <input
               type="text"
@@ -127,10 +122,7 @@ const Navbar = () => {
 
             {/* Dropdown Suggestions */}
             {isSuggestionsDropdownOpen && suggestions.length > 0 && (
-              <div
-                ref={dropdownRef}
-                className="absolute left-0 right-0 mt-2 bg-white shadow-lg rounded-md z-50"
-              >
+              <div ref={dropdownRef} className="absolute left-0 right-0 mt-2 bg-white shadow-lg rounded-md z-50">
                 <ul className="max-h-60 overflow-y-auto">
                   {suggestions.map((book) => (
                     <li
@@ -144,16 +136,6 @@ const Navbar = () => {
                 </ul>
               </div>
             )}
-          </div>
-
-          {/* Books Link */}
-          <div>
-            <Link
-              to="/allbooks"
-              className="text-gray-700 font-semibold hover:text-gray-500 transition-colors"
-            >
-              Books
-            </Link>
           </div>
         </div>
 
@@ -183,20 +165,8 @@ const Navbar = () => {
             onMouseEnter={() => setIsHoveredCart(true)}
             onMouseLeave={() => setIsHoveredCart(false)}
           >
-            <FaShoppingCart
-              style={{
-                color: "#000",
-                fontSize: "20px",
-                marginRight: "8px",
-              }}
-            />
-            <span
-              style={{
-                color: "#000",
-                fontWeight: "600",
-                fontSize: "20px",
-              }}
-            >
+            <FaShoppingCart style={{ color: "#000", fontSize: "20px", marginRight: "8px" }} />
+            <span style={{ color: "#000", fontWeight: "600", fontSize: "20px" }}>
               {cartItems.length > 0 ? cartItems.length : 0}
             </span>
           </Link>
@@ -208,22 +178,34 @@ const Navbar = () => {
               onMouseLeave={() => setIsHoveredHeart(false)}
               className="p-2"
               style={{
-                transition: "transform 0.3s ease-in-out",
                 transform: isHoveredHeart ? "scale(1.2)" : "scale(1)",
+                transition: "transform 0.3s ease-in-out",
               }}
             >
               <FaHeart className="text-xl text-gray-800" />
             </button>
           </Link>
 
+          {/* Books Link */}
+          <Link
+            to="/allbooks"
+            className="text-gray-700 font-semibold"
+            onMouseEnter={() => setIsHoveredBooks(true)}
+            onMouseLeave={() => setIsHoveredBooks(false)}
+            style={{
+              fontSize: "16px",
+              transform: isHoveredBooks ? "scale(1.1)" : "scale(1)",
+              transition: "transform 0.3s ease-in-out",
+            }}
+          >
+            Books
+          </Link>
+
           {/* User Profile Icon */}
           <div className="relative" style={{ minWidth: "40px" }}>
             {currentUser ? (
               <>
-                <button
-                  ref={profileButtonRef}
-                  onClick={handleProfileDropdownToggle}
-                >
+                <button ref={profileButtonRef} onClick={handleProfileDropdownToggle}>
                   <img
                     src={avatarImg}
                     alt="User"
@@ -231,7 +213,6 @@ const Navbar = () => {
                   />
                 </button>
 
-                {/* Dropdown Menu */}
                 {isProfileDropdownOpen && (
                   <div
                     ref={dropdownRef}
@@ -239,10 +220,7 @@ const Navbar = () => {
                   >
                     <ul className="py-2">
                       {navigation.map((item) => (
-                        <li
-                          key={item.name}
-                          onClick={() => setIsProfileDropdownOpen(false)}
-                        >
+                        <li key={item.name}>
                           <Link
                             to={item.href}
                             className="block px-4 py-2 text-sm hover:bg-gray-100"
