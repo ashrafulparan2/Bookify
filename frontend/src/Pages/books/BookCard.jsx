@@ -158,15 +158,40 @@ const BookCard = ({ book }) => {
           onClick={() => handleAddToCart(book)}
           className="flex items-center justify-center gap-2"
           style={{
-            minWidth: "150px",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textDecoration: "none",
+            minWidth: "150px", // Minimum width for the button
+            width: "auto", // Allow width to adjust based on content
+            height: "40px", // Set height for consistency
             color: "#fff",
-            backgroundImage: "linear-gradient(45deg, #fbd84b, #f0a30a)",
-            borderRadius: "30px",
-            transition: "all 0.3s ease-in-out",
+            backgroundImage: "linear-gradient(45deg, #fbd84b, #f0a30a)", // Yellowish gradient
+            fontSize: "18px", // Text size
+            borderRadius: isHovered ? "30px" : "30px 0px 30px 30px", // Conditional border radius
+            transition: "all 0.3s ease-in-out", // Smooth hover transition
+            border: "none", // No borders
+            cursor: "pointer", // Clickable pointer
+            transform: isHovered ? "scale(1.1)" : "scale(1)", // Slight zoom on hover
           }}
+          onMouseEnter={() => setIsHovered(true)} // Start hover effect
+          onMouseLeave={() => setIsHovered(false)} // End hover effect
         >
-          <FiShoppingCart style={{ color: "#000" }} />
-          <span style={{ color: "#000", fontWeight: "600" }}>Add to Cart</span>
+          <FiShoppingCart
+            style={{
+              color: "#000", // Black icon color
+              fontSize: "20px", // Icon size
+            }}
+          />
+          <span
+            style={{
+              color: "#000", // Black text color
+              fontWeight: "600", // Bold text
+              fontSize: "16px", // Text size
+            }}
+          >
+            Add to Cart
+          </span>
         </button>
       </div>
     </div>
