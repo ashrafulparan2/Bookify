@@ -15,7 +15,7 @@ import { useFetchAllBooksQuery } from "../../redux/features/books/booksApi";
 const Recommened = () => {
   const { data: books = [] } = useFetchAllBooksQuery();
   return (
-    <div className="py-2">
+    <div className="py-2" style={{paddingTop: "30px"}}>
       <h2 className="text-3xl font-semibold mb-0">Recommended for you </h2>
 
       <Swiper

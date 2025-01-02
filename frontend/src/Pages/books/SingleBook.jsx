@@ -43,59 +43,58 @@ const SingleBook = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-8 space-y-8 bg-white shadow-xl rounded-2xl">
-      
-      {/* Single Book Details Section */}
-      <div className="lg:flex lg:gap-16 space-y-8 lg:space-y-0">
-        {/* Left: Book Cover + Add to Cart */}
-        <div className="lg:w-1/3 flex flex-col items-center">
-          <img
-            src={getImgUrl(book.coverImage)}
-            alt={book.title}
-            className="w-full h-[400px] lg:h-[500px] object-cover rounded-xl shadow-lg mb-6"
-          />
-          <button
-            onClick={() => handleAddToCart(book)}
-            className="flex items-center justify-center bg-primary text-white px-8 py-3 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105"
-            style={{
-              backgroundImage: 'linear-gradient(45deg, #fbd84b, #f0a30a)',
-            }}
-            onMouseEnter={() => setIsHoveredCart(true)}
-            onMouseLeave={() => setIsHoveredCart(false)}
-          >
-            <FiShoppingCart className="mr-3" style={{ fontSize: '20px' }} />
-            <span>Add to Cart</span>
-          </button>
-        </div>
-
-        {/* Right: Book Information and Description */}
-        <div className="lg:w-2/3 flex flex-col justify-center space-y-6 text-left">
-          <h1 className="text-3xl font-bold text-gray-800">{book.title}</h1>
-
-          {/* Trending Badge */}
-          {book.trending && (
-            <span className="inline-block bg-red-600 text-white px-3 py-1 rounded-full text-sm">
-              Trending
-            </span>
-          )}
-
-          {/* Author & Publish Date */}
-          <p className="text-gray-700"><strong>Author:</strong> {book.author || 'admin'}</p>
-          <p className="text-gray-700"><strong>Published:</strong> {new Date(book?.createdAt).toLocaleDateString()}</p>
-
-          {/* Category */}
-          <p className="text-gray-700 capitalize"><strong>Category:</strong> {book?.category}</p>
-
-          {/* Price */}
-          <div className="flex items-center gap-2">
-            {book.oldPrice && <span className="text-gray-500 line-through">৳ {book.oldPrice}</span>}
-            {book.newPrice && <span className="text-xl font-bold text-green-600">৳ {book.newPrice}</span>}
-          </div>
-
-          {/* Description */}
-          <p className="text-gray-700 text-justify"><strong>Description:</strong> {book.description}</p>
-        </div>
+    <div className="max-w-screen-2xl mx-auto p-8 space-y-8 bg-white shadow-xl rounded-2xl">
+    {/* Single Book Details Section */}
+    <div className="lg:flex lg:gap-16 space-y-8 lg:space-y-0">
+      {/* Left: Book Cover + Add to Cart */}
+      <div className="lg:w-1/3 flex flex-col items-center">
+      <img
+        src={getImgUrl(book.coverImage)}
+        alt={book.title}
+        className="w-full h-[500px] lg:h-[600px] object-cover rounded-xl shadow-lg mb-6"
+      />
+        <button
+          onClick={() => handleAddToCart(book)}
+          className="flex items-center justify-center bg-primary text-white px-8 py-3 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105"
+          style={{
+            backgroundImage: 'linear-gradient(45deg, #fbd84b, #f0a30a)',
+          }}
+          onMouseEnter={() => setIsHoveredCart(true)}
+          onMouseLeave={() => setIsHoveredCart(false)}
+        >
+          <FiShoppingCart className="mr-3" style={{ fontSize: '20px' }} />
+          <span>Add to Cart</span>
+        </button>
       </div>
+
+      {/* Right: Book Information and Description */}
+      <div className="lg:w-2/3 flex flex-col justify-center space-y-6 text-left">
+        <h1 className="text-3xl font-bold text-gray-800">{book.title}</h1>
+
+        {/* Trending Badge */}
+        {book.trending && (
+          <span className="inline-block bg-red-600 text-white px-3 py-1 rounded-full text-sm">
+            Trending
+          </span>
+        )}
+
+        {/* Author & Publish Date */}
+        <p className="text-gray-700"><strong>Author:</strong> {book.author || 'admin'}</p>
+        <p className="text-gray-700"><strong>Published:</strong> {new Date(book?.createdAt).toLocaleDateString()}</p>
+
+        {/* Category */}
+        <p className="text-gray-700 capitalize"><strong>Category:</strong> {book?.category}</p>
+
+        {/* Price */}
+        <div className="flex items-center gap-2">
+          {book.oldPrice && <span className="text-gray-500 line-through">৳ {book.oldPrice}</span>}
+          {book.newPrice && <span className="text-xl font-bold text-green-600">৳ {book.newPrice}</span>}
+        </div>
+
+        {/* Description */}
+        <p className="text-gray-700 text-justify"><strong>Description:</strong> {book.description}</p>
+      </div>
+    </div>
 
     {/* Related Books Section */}
     <div className="mt-8" style={{ paddingTop: "2rem" }}>

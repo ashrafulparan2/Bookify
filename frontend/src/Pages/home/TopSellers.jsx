@@ -37,7 +37,7 @@ const TopSellers = () => {
         );
 
   return (
-    <div className="pt-3 pb-6">
+    <div className="pt-3 pb-6" style={{ paddingTop: "70px"}}>
       <h2 className="text-3xl font-semibold mb-6">Top Sellers</h2>
       {/* category filtering */}
       <div className="mb-8 flex items-center">
