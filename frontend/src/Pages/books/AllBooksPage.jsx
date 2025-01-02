@@ -9,6 +9,7 @@ export const AllBooksPage = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [wishlist, setWishlist] = useState([]);  // State to manage wishlist
 
     const [filters, setFilters] = useState({
         priceRange: [0, 1000],
@@ -96,6 +97,17 @@ export const AllBooksPage = () => {
         if (currentPage > 1) {
             setCurrentPage((prev) => prev - 1);
         }
+    };
+
+    // Function to handle adding/removing books from the wishlist
+    const toggleWishlist = (bookId) => {
+        setWishlist((prevWishlist) => {
+            if (prevWishlist.includes(bookId)) {
+                return prevWishlist.filter(id => id !== bookId); // Remove from wishlist
+            } else {
+                return [...prevWishlist, bookId]; // Add to wishlist
+            }
+        });
     };
 
     const handleFilterChange = (e) => {

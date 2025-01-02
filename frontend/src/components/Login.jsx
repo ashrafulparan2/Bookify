@@ -74,39 +74,46 @@ const Login = () => {
                             className='shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow'
                         />
                     </div>
-                    <div className='mb-2 text-right'>
-                        <Link
-                            to="/reset-password"
-                            className='text-blue-500 hover:text-blue-700 text-sm font-medium'
-                        >
-                            Forgot Password? Click here to reset
-                        </Link>
+                    <div className='mb-2 text-left'>
+                        <p className='text-sm'>
+                            Forgot Password?{" "}
+                            <Link
+                                to="/reset-password"
+                                className='text-blue-500 hover:text-blue-700 font-medium'
+                            >
+                                Click here
+                            </Link>
+                        </p>
                     </div>
                     {message && <p className='text-red-500 text-xs italic mb-3'>{message}</p>}
                     <div>
                         <button
-                            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none'
+                            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 rounded-full w-full focus:outline-none'
                         >
                             Login
                         </button>
                     </div>
                 </form>
-                <p className='align-baseline font-medium mt-4 text-sm'>
-                    Haven't an account? Please{' '}
-                    <Link to="/register" className='text-blue-500 hover:text-blue-700'>
-                        Register
-                    </Link>
-                </p>
 
                 {/* Google Sign-In */}
                 <div className='mt-4'>
                     <button
                         onClick={handleGoogleSignIn}
-                        className='w-full flex flex-wrap gap-1 items-center justify-center bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none'
+                        className='w-full flex flex-wrap gap-1 items-center justify-center bg-blue-800 hover:bg-blue-700 text-white font-bold py-3 rounded-full focus:outline-none'
                     >
                         <FaGoogle className='mr-2' />
                         Sign in with Google
                     </button>
+                </div>
+
+                {/* Register Section */}
+                <div className='mt-6 text-center'>
+                    <p className='text-sm'>
+                        Don't have an account?{" "}
+                        <Link to="/register" className='text-blue-500 hover:text-blue-700 font-medium'>
+                            Register
+                        </Link>
+                    </p>
                 </div>
 
                 <p className='mt-5 text-center text-gray-500 text-xs'>

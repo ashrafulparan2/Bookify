@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { HiMiniBars3CenterLeft } from "react-icons/hi2";
 import { FaSearch, FaHeart, FaUser, FaShoppingCart } from "react-icons/fa";
 import avatarImg from "../assets/avatar.png";
+import logoImg from "../assets/logo.png"; // Add your logo image here
 import { useSelector } from "react-redux";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
@@ -17,8 +17,9 @@ const navigation = [
 const Navbar = () => {
   const [isHoveredHeart, setIsHoveredHeart] = useState(false);
   const [isHoveredCart, setIsHoveredCart] = useState(false);
-  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false); // Separate state for profile dropdown
-  const [isSuggestionsDropdownOpen, setIsSuggestionsDropdownOpen] = useState(false); // Separate state for suggestions dropdown
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [isSuggestionsDropdownOpen, setIsSuggestionsDropdownOpen] =
+    useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [allBooks, setAllBooks] = useState([]);
@@ -28,7 +29,6 @@ const Navbar = () => {
   const dropdownRef = useRef(null);
   const profileButtonRef = useRef(null);
 
-  // Fetch all books once
   useEffect(() => {
     const fetchAllBooks = async () => {
       try {
@@ -42,7 +42,6 @@ const Navbar = () => {
     fetchAllBooks();
   }, []);
 
-  // Filter books based on search query and limit to top 5 results
   const fetchSuggestions = (query) => {
     if (!query) {
       setSuggestions([]);
@@ -51,9 +50,7 @@ const Navbar = () => {
     }
 
     const filteredSuggestions = allBooks
-      .filter((book) =>
-        book.title.toLowerCase().includes(query.toLowerCase())
-      )
+      .filter((book) => book.title.toLowerCase().includes(query.toLowerCase()))
       .slice(0, 5);
 
     setSuggestions(filteredSuggestions);
@@ -73,10 +70,11 @@ const Navbar = () => {
   };
 
   const handleClickOutsideDropdown = (e) => {
-    // Close the profile dropdown if the click is outside the profile button or dropdown
     if (
-      dropdownRef.current && !dropdownRef.current.contains(e.target) &&
-      profileButtonRef.current && !profileButtonRef.current.contains(e.target)
+      dropdownRef.current &&
+      !dropdownRef.current.contains(e.target) &&
+      profileButtonRef.current &&
+      !profileButtonRef.current.contains(e.target)
     ) {
       setIsProfileDropdownOpen(false);
     }
@@ -98,7 +96,7 @@ const Navbar = () => {
 
   const handleProfileDropdownToggle = () => {
     setIsProfileDropdownOpen((prevState) => !prevState);
-    setIsSuggestionsDropdownOpen(false); // Close suggestions dropdown if profile is opened
+    setIsSuggestionsDropdownOpen(false);
   };
 
   return (
@@ -107,7 +105,8 @@ const Navbar = () => {
         {/* Left Section */}
         <div className="flex items-center gap-4 flex-1">
           <Link to="/">
-            <HiMiniBars3CenterLeft className="text-2xl" />
+            {/* Logo Image */}
+            <img src={logoImg} alt="Logo" className="h-10" />
           </Link>
 
           {/* Search Bar */}
@@ -136,7 +135,7 @@ const Navbar = () => {
                   {suggestions.map((book) => (
                     <li
                       key={book._id}
-                      onClick={() => handleSuggestionClick(book._id)} // Passing book ID
+                      onClick={() => handleSuggestionClick(book._id)}
                       className="px-4 py-2 text-sm cursor-pointer hover:bg-gray-100"
                     >
                       {book.title}
@@ -146,22 +145,23 @@ const Navbar = () => {
               </div>
             )}
           </div>
-          {/* ---- New Books Link ---- */}
-        <div>
+
+          {/* Books Link */}
+          <div>
             <Link
               to="/allbooks"
               className="text-gray-700 font-semibold hover:text-gray-500 transition-colors"
             >
               Books
             </Link>
-        </div>
+          </div>
         </div>
 
         {/* Right Section */}
         <div className="flex items-center gap-3 md:gap-6 relative">
           {/* Cart Button */}
-            <Link
-              to="/cart"
+          <Link
+            to="/cart"
             className="flex items-center justify-center bg-primary lg:min-w-32 sm:px-2 sm:py-1 md:px-4 md:py-2 lg:px-12 lg:py-4"
             style={{
               display: "inline-flex",
@@ -202,8 +202,7 @@ const Navbar = () => {
           </Link>
 
           {/* Heart Icon */}
-          <Link
-            to="/wishlist">
+          <Link to="/wishlist">
             <button
               onMouseEnter={() => setIsHoveredHeart(true)}
               onMouseLeave={() => setIsHoveredHeart(false)}
@@ -216,12 +215,13 @@ const Navbar = () => {
               <FaHeart className="text-xl text-gray-800" />
             </button>
           </Link>
+
           {/* User Profile Icon */}
           <div className="relative" style={{ minWidth: "40px" }}>
             {currentUser ? (
               <>
                 <button
-                  ref={profileButtonRef} // Add this reference to the button
+                  ref={profileButtonRef}
                   onClick={handleProfileDropdownToggle}
                 >
                   <img
@@ -234,7 +234,7 @@ const Navbar = () => {
                 {/* Dropdown Menu */}
                 {isProfileDropdownOpen && (
                   <div
-                    ref={dropdownRef} // Ensure this references the dropdown
+                    ref={dropdownRef}
                     className="absolute right-0 mt-2 w-48 bg-white shadow-xl rounded-xl z-50"
                   >
                     <ul className="py-2">

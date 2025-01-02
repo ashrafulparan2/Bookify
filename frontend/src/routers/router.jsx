@@ -3,25 +3,24 @@ import App from "../App";
 import AdminLogin from "../components/AdminLogin";
 import Login from "../components/Login";
 import Register from "../components/Register";
-import CartPage from "../pages/books/CartPage";
-import CheckoutPage from "../pages/books/CheckoutPage";
-import OrderPage from "../pages/books/OrderPage";
 import PrivateRoute from "./PrivateRoute";
 import SingleBook from "../Pages/books/SingleBook";
-// import OrderPage from "../pages/books/OrderPage";
 import { AllBooksPage } from "../Pages/books/AllBooksPage";
 import AdminRoute from "./AdminRoute";
 import ResetPassword from "../components/ResetPassword";
 import PasswordReset from "../components/PasswordReset";
 import Wishlist from "../Pages/books/Wishlist";
 
-import AddBook from "../pages/dashboard/addBook/AddBook";
-import Dashboard from "../pages/dashboard/Dashboard";
-import DashboardLayout from "../pages/dashboard/DashboardLayout";
+import AddBook from "../Pages/dashboard/addBook/AddBook";
+import Dashboard from "../Pages/dashboard/Dashboard";
+import DashboardLayout from "../Pages/dashboard/DashboardLayout";
 import UpdateBook from "../Pages/dashboard/EditBook/UpdateBook";
-import ManageBooks from "../pages/dashboard/manageBooks/ManageBooks";
-import UserDashboard from "../pages/dashboard/users/UserDashboard";
-import Home from "../pages/home/Home";
+import ManageBooks from "../Pages/dashboard/manageBooks/ManageBooks";
+import UserDashboard from "../Pages/dashboard/users/UserDashboard";
+import Home from "../Pages/home/Home";
+import CartPage from "../Pages/books/CartPage";
+import CheckoutPage from "../Pages/books/CheckoutPage";
+import OrderPage from "../Pages/books/OrderPage";
 
 
 const router = createBrowserRouter([
@@ -35,7 +34,7 @@ const router = createBrowserRouter([
         },
         {
             path: "/orders",
-            element: <PrivateRoute><OrderPage/></PrivateRoute>
+            element: <PrivateRoute> <OrderPage/> </PrivateRoute>
         },
         {
             path: "/about",
@@ -64,10 +63,6 @@ const router = createBrowserRouter([
         {
           path: "/cart",
           element: <CartPage/>
-        },
-        {
-          path: "/checkout",
-          element: <PrivateRoute><CheckoutPage/></PrivateRoute>
         },
         {
           path: "/books/:id",
