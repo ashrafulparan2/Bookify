@@ -10,7 +10,7 @@ require('dotenv').config()
 // middleware
 app.use(express.json())
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://bookify-kpyge4twy-ashraful-islam-parans-projects.vercel.app/'],
+    origin: ['http://localhost:5173', 'https://bookify-front.vercel.app'],
     credentials: true
 }))
 
@@ -31,7 +31,7 @@ async function main(){
 }
 
 
-main().then(()=> console.log("MongDB connected")).catch(err=> console.log(err));
+main().then(()=> console.log("MongoDB connected")).catch(err=> console.log(err));
 
 app.use("/api/books", bookRoutes)
 app.use("/api/auth", userRoutes)
