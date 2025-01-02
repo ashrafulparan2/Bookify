@@ -51,6 +51,13 @@ const booksApi = createApi({
                 method: "DELETE"
             }),
             invalidatesTags: ["Books"]
+        }),
+        createReview: builder.mutation({
+            query: bookID => ({
+                url: '/${data.bookID}/review',
+                method: 'POST',
+                body: data
+            })
         })
     })
 })

@@ -6,8 +6,10 @@ const {
   getSingleBook,
   UpdateBook,
   deleteABook,
-} = require("./book.controller");
+  createBookReview
+} = require("../books/book.controller");
 const verifyAdminToken = require("../middleware/verifyAdminToken");
+const protect = require("../middleware/verifyUserToken");
 const router = express.Router();
 
 // frontend => backend server => controller => book schema  => database => send to server => back to the frontend
@@ -29,5 +31,7 @@ router.get("/:id", getSingleBook);
 router.put("/edit/:id", verifyAdminToken, UpdateBook);
 
 router.delete("/:id", verifyAdminToken, deleteABook);
+
+router.route("/:id/review").post(protect, createBookReview);
 
 module.exports = router;
