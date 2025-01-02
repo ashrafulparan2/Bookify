@@ -98,17 +98,35 @@ const Navbar = () => {
     setIsProfileDropdownOpen((prevState) => !prevState);
     setIsSuggestionsDropdownOpen(false);
   };
+   // Keyframe animations
+   const keyframes = `
+   @keyframes float {
+     0%, 100% { transform: translateY(0); }
+     50% { transform: translateY(-10px); }
+   }
+   @keyframes glow {
+     0%, 100% { filter: brightness(1); }
+     50% { filter: brightness(1.5); }
+   }
+ `;
 
   return (
     <header className="max-w-screen-2xl mx-auto px-4 py-6">
       <nav className="flex items-center justify-between gap-4">
         {/* Left Section */}
         <div className="flex items-center gap-4 flex-1">
-          <Link to="/">
-            {/* Logo Image */}
-            <img src={logoImg} alt="Logo" className="h-10" />
+        <Link to="/">
+            {/* Animated Text Logo */}
+            <h1
+              className="text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-yellow-500 bg-clip-text text-transparent inline-block"
+              style={{
+                animation: "float 3s ease-in-out infinite",
+                letterSpacing: "2px",
+              }}
+            >
+              Bookify
+            </h1>
           </Link>
-
           {/* Search Bar */}
           <div className="relative flex-grow max-w-full sm:max-w-xs md:max-w-md" style={{ minWidth: "110px" }}>
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
@@ -137,6 +155,18 @@ const Navbar = () => {
               </div>
             )}
           </div>
+
+          {/* Books Link */}
+          <div className="relative group">
+  <Link
+    to="/allbooks"
+    className="text-gray-900 font-extrabold text-lg tracking-wide transition duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+  >
+    Books
+  </Link>
+  <span className="absolute left-0 bottom-0 w-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full transition-all duration-500 group-hover:w-full"></span>
+</div>
+
         </div>
 
         {/* Right Section */}
@@ -187,7 +217,7 @@ const Navbar = () => {
           </Link>
 
           {/* Books Link */}
-          <Link
+          {/* <Link
             to="/allbooks"
             className="text-gray-700 font-semibold"
             onMouseEnter={() => setIsHoveredBooks(true)}
@@ -199,7 +229,7 @@ const Navbar = () => {
             }}
           >
             Books
-          </Link>
+          </Link> */}
 
           {/* User Profile Icon */}
           <div className="relative" style={{ minWidth: "40px" }}>
