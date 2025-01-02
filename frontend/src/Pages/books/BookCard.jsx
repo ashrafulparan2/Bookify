@@ -6,7 +6,11 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { showAddToCartPopup } from "../../redux/features/cart/cartSlice";
 import { useAuth } from "../../context/AuthContext";
-import GetBaseUrl from "../../utils/baseURL";
+
+const getBaseUrl = "http://localhost:5000"; 
+
+
+
 
 const BookCard = ({ book }) => {
   const dispatch = useDispatch();
@@ -20,7 +24,7 @@ const BookCard = ({ book }) => {
       if (currentUser) {
         try {
           const response = await fetch(
-            `${GetBaseUrl}/api/wishlist/${currentUser.email}`
+            `${getBaseUrl}/api/wishlist/${currentUser.email}`
           );
           if (!response.ok) {
             throw new Error("Failed to fetch wishlist");
@@ -53,8 +57,8 @@ const BookCard = ({ book }) => {
 
     try {
       const endpoint = isLiked
-        ? `${GetBaseUrl}/api/wishlist/remove`
-        : `${GetBaseUrl}/api/wishlist/add`;
+        ? `${getBaseUrl}/api/wishlist/remove`
+        : `${getBaseUrl}/api/wishlist/add`;
 
       const payload = isLiked
         ? { email: currentUser.email, productId: book._id }
