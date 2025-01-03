@@ -29,18 +29,23 @@
 
 ## Table of Contents
 
+- [Overview](#-overview)
+- [Key Features](#-key-features)
+- [Technologies & Tools](#-technologies--tools)
 - [Features](#features)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
-- [Environment Variables](#environment-variables)
-- [Running the Application](#running-the-application)
-- [API Endpoints](#api-endpoints)
-- [Frontend](#frontend)
-- [Contributing](#contributing)
-- [License](#license)
+  - [Homepage](#homepage)
+  - [All Books Page](#all-books-page)
+  - [User Signup](#user-signup)
+  - [User Login](#user-login)
+  - [Admin Dashboard](#admin-dashboard)
+  - [Add to cart](#add-to-cart)
+  - [Checkout Page](#checkout-page)
+  - [Order Page](#order-page)
+  - [Books Description Page](#books-description-page)
+  - [Related Books Section](#related-books-section)
+  - [Review Section](#review-section)
 
 
-## Project Structure
 ## Installation
 1. Clone the repository:
 ```sh
