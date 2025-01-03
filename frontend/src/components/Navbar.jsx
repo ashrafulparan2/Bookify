@@ -119,14 +119,16 @@ const Navbar = () => {
         <Link to="/">
             {/* Animated Text Logo */}
             <h1
-              className="text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-yellow-500 bg-clip-text text-transparent inline-block"
-              style={{
-                animation: "float 3s ease-in-out infinite",
-                letterSpacing: "2px",
-              }}
-            >
-              Bookify
-            </h1>
+  className="text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-yellow-500 bg-clip-text text-transparent inline-block"
+  style={{
+    animation: "float 3s ease-in-out infinite",
+    letterSpacing: "2px",
+  }}
+>
+  <span className="block md:hidden">B</span> {/* Visible only on mobile */}
+  <span className="hidden md:block">Bookify</span> {/* Visible on larger screens */}
+</h1>
+
           </Link>
           {/* Search Bar */}
           <div className="relative flex-grow max-w-full sm:max-w-xs md:max-w-md" style={{ minWidth: "110px" }}>
