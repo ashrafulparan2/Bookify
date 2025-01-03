@@ -69,3 +69,30 @@ Start the frontend development server:
 cd frontend
 npm run dev
 ```
+## Features
+### Homepage
+![alt text](./frontend//src/assets/Readme/HomePage1.JPG)
+
+![alt text](./frontend//src/assets/Readme/HomePage2.JPG)
+![alt text](./frontend//src/assets/Readme/HomePage3.JPG)
+### All Books Page
+![alt text](./frontend//src/assets/Readme/AllBooksPage.JPG)
+
+### User Signup
+![alt text](./frontend//src/assets/Readme/Register.JPG)
+### User Login
+![alt text](./frontend//src/assets/Readme/Login.JPG)
+### Admin Dashboard
+![alt text](./frontend//src/assets/Readme/dashboardadmin.JPG)
+### Add to cart
+![alt text](./frontend//src/assets/Readme/AddtoCart.JPG)
+### Checkout Page
+![alt text](./frontend//src/assets/Readme/CheckoutPage.JPG)
+### Order Page
+![alt text](./frontend//src/assets/Readme/OrderPage.JPG)
+### Books Description Page
+![alt text](./frontend//src/assets/Readme/SingleBook.JPG)
+### Related Books Section
+![alt text](./frontend//src/assets/Readme/RelatedBooks.JPG)
+### Review Section
+![alt text](./frontend//src/assets/Readme/Review%20System.JPG)
