@@ -11,8 +11,8 @@ const Banner = () => {
 
   const imageStyle = {
     width: "100%", // Ensures the image takes the full container width
-    maxWidth: "600px", // Sets a maximum width
-    height: "400px", // Ensures consistent height
+    maxWidth: "800px", // Sets a maximum width
+    height: "450px", // Ensures consistent height
     objectFit: "cover", // Maintains aspect ratio while filling the space
     margin: "0 auto", // Centers the image
   };
@@ -23,8 +23,7 @@ const Banner = () => {
   return (
     <div className="flex flex-col md:flex-row-reverse py-3 justify-between items-center gap-12">
       {/* Carousel */}
-      
-      <div className="md:w-1/2 w-full flex items-center md:justify-end">
+      <div className="md:w-3/4 w-full flex items-center justify-end">
       <Link to={`/allbooks`}>
         <Carousel
           showThumbs={false}
@@ -33,6 +32,7 @@ const Banner = () => {
           interval={2000}
           stopOnHover
           showStatus={false}
+          style={{ width: "100%" }}
         >
           <div>
             <img style={imageStyle} src={bannerImg1} alt="Banner 1" />
@@ -48,27 +48,25 @@ const Banner = () => {
       </div>
 
       {/* Text Section */}
+      
+      <div className="md:w-2/3 w-full">
       <Link to={`/allbooks`}>
-      <div className="md:w-1/2 w-full">
-      <h2
-  style={{
-    ...animationStyle,
-    padding: '10px 0', // Add padding to ensure there's space around the text
-    lineHeight: '1.5',  // Adjust line height to avoid text being cut off
-  }}
-  className="md:text-3xl text-2xl font-medium mb-7 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text"
->
-  পাঠে নতুন দিগন্ত, বইয়ের সাথে বন্ধুত্ব
-</h2>
-
+        <h2
+          style={animationStyle}
+          className="md:text-3xl text-2xl font-medium mb-7 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text"
+        >
+          পাঠে নতুন দিগন্ত, বইয়ের সাথে বন্ধুত্ব
+        </h2>
+        </Link>
+        <Link to={'/allBooks'}>
         <p style={animationStyle} className="mb-10">
           আপনার প্রিয় বই এখন এক ক্লিকে – সহজে বই কিনুন, নতুন বইয়ের কালেকশন
           আবিষ্কার করুন এবং সেরা অফারে আপনার বুকশেলফ সাজান আমাদের বুকস্টোর থেকে!
         </p>
-        
+        </Link>
 
         {/* Button with hover and transition effects */}
-        <Link to={`/allbooks`}>
+        <Link to={'/allBooks'}>
         <button
           style={{
             display: "inline-block",
@@ -90,7 +88,7 @@ const Banner = () => {
         </button>
         </Link>
       </div>
-      </Link>
+      {/* </Link> */}
       <style>
         {`
           @keyframes fadeIn {
