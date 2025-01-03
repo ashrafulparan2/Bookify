@@ -75,7 +75,7 @@ const SingleBook = () => {
       : 0;
 
   return (
-    <div className="max-w-7xl mx-auto p-8 space-y-8 bg-white shadow-xl rounded-2xl">
+    <div className="max-w-screen-2xl mx-auto p-8 space-y-8 bg-white shadow-xl rounded-2xl">
       
       {/* Single Book Details Section */}
       <div className="lg:flex lg:gap-16 space-y-8 lg:space-y-0">

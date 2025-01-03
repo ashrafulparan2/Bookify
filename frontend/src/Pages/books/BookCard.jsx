@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { showAddToCartPopup } from "../../redux/features/cart/cartSlice";
 import { useAuth } from "../../context/AuthContext";
 
-const getBaseUrl = "http://localhost:5000"; 
+const getBaseUrl = "https://bookify-back.vercel.app"; 
 
 
 
