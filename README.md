@@ -76,28 +76,61 @@ npm run dev
 ```
 ## Features
 ### Homepage
-![alt text](./frontend//src/assets/Readme/HomePage1.JPG)
+The homepage provides an overview of the platform, showcasing featured books, top sellers, and new arrivals. It serves as the main entry point for users to explore the book collection.
 
+![alt text](./frontend//src/assets/Readme/HomePage1.JPG)
+Top Sellers Section Shows the top selling books at a certain period
 ![alt text](./frontend//src/assets/Readme/HomePage2.JPG)
+Recommended for you shows curated books just for you
 ![alt text](./frontend//src/assets/Readme/HomePage3.JPG)
+
 ### All Books Page
+This page displays a comprehensive list of all available books. Users can browse through the collection, filter by categories, and search for specific titles or authors.
+
 ![alt text](./frontend//src/assets/Readme/AllBooksPage.JPG)
 
 ### User Signup
+New users can create an account by providing their details. This allows them to access personalized features such as adding books to their wishlist and placing orders.
+
 ![alt text](./frontend//src/assets/Readme/Register.JPG)
+
 ### User Login
+Existing users can log in to their accounts to access their saved preferences, order history, and other personalized features.
+
 ![alt text](./frontend//src/assets/Readme/Login.JPG)
+
 ### Admin Dashboard
+Admins have access to a dedicated dashboard where they can manage the book listings, including adding new books, updating existing ones, and removing books from the catalog.
+
 ![alt text](./frontend//src/assets/Readme/dashboardadmin.JPG)
+
 ### Add to cart
+Users can add books to their cart for purchase. The cart keeps track of selected items and allows users to proceed to checkout when they are ready to complete their purchase.
+
 ![alt text](./frontend//src/assets/Readme/AddtoCart.JPG)
+
 ### Checkout Page
+The checkout page provides a summary of the items in the user's cart and allows them to enter their shipping and payment information to complete the purchase.
+
 ![alt text](./frontend//src/assets/Readme/CheckoutPage.JPG)
+
 ### Order Page
+The order page allows users to view their order history, track the status of their current orders, and manage their past purchases.
+
 ![alt text](./frontend//src/assets/Readme/OrderPage.JPG)
+
 ### Books Description Page
+This page provides detailed information about a specific book, including its description, author, price, and reviews from other users.
+
 ![alt text](./frontend//src/assets/Readme/SingleBook.JPG)
+
 ### Related Books Section
+The related books section suggests books similar to the one currently being viewed, helping users discover more books of interest.
+
 ![alt text](./frontend//src/assets/Readme/RelatedBooks.JPG)
+
 ### Review Section
+Users can read reviews left by other readers and leave their own reviews for books they have read. This section helps users make informed decisions about their book purchases.
+
 ![alt text](./frontend//src/assets/Readme/Review%20System.JPG)
+````
