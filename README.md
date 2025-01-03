@@ -9,7 +9,7 @@
 |-----------------------------|-------------------------------------------------------------------------------------------------|
 | **🔐 User Authentication**   | Secure login and registration system using [Firebase](https://firebase.google.com/) for user authentication.      |
 | **📚 Book Catalog**          | Users can browse and search for books by title, author, or genre.                              |
-| **🛒 Cart and Borrowing**    | Users can add books to their cart, borrow books, and track borrowing history.                  |
+| **🛒 Cart and ordering**    | Users can add books to their cart, order books, and track order history.                  |
 | **📊 Admin Dashboard**       | Admins can add, update, delete, and manage book listings.                                       |
 | **📂 Data Storage**          | Store user data and book information in [MongoDB](https://www.mongodb.com/). |
 | **💬 User Reviews**          | Allow users to leave reviews and ratings for books they have borrowed.                         |
