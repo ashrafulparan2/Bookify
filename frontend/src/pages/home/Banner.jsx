@@ -11,8 +11,8 @@ const Banner = () => {
 
   const imageStyle = {
     width: "100%", // Ensures the image takes the full container width
-    maxWidth: "600px", // Sets a maximum width
-    height: "400px", // Ensures consistent height
+    maxWidth: "800px", // Sets a maximum width
+    height: "450px", // Ensures consistent height
     objectFit: "cover", // Maintains aspect ratio while filling the space
     margin: "0 auto", // Centers the image
   };
@@ -23,7 +23,7 @@ const Banner = () => {
   return (
     <div className="flex flex-col md:flex-row-reverse py-3 justify-between items-center gap-12">
       {/* Carousel */}
-      <div className="md:w-1/2 w-full flex items-center md:justify-end">
+      <div className="md:w-3/4 w-full flex items-center justify-end">
         <Carousel
           showThumbs={false}
           autoPlay={true}
@@ -31,6 +31,7 @@ const Banner = () => {
           interval={2000}
           stopOnHover
           showStatus={false}
+          style={{ width: "100%" }}
         >
           <div>
             <img style={imageStyle} src={bannerImg1} alt="Banner 1" />
@@ -45,7 +46,7 @@ const Banner = () => {
       </div>
 
       {/* Text Section */}
-      <div className="md:w-1/2 w-full">
+      <div className="md:w-2/3 w-full">
         <h2
           style={animationStyle}
           className="md:text-3xl text-2xl font-medium mb-7 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text"
