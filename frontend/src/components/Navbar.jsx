@@ -160,7 +160,7 @@ const Navbar = () => {
           </div>
 
           {/* Books Link */}
-          <div className="relative group">
+          <div className="relative group hidden md:block">
   <Link
     to="/allbooks"
     className="text-gray-900 font-extrabold text-lg tracking-wide transition duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
@@ -169,6 +169,7 @@ const Navbar = () => {
   </Link>
   <span className="absolute left-0 bottom-0 w-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full transition-all duration-500 group-hover:w-full"></span>
 </div>
+
 
         </div>
 
